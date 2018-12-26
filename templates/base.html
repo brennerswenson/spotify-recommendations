@@ -43,8 +43,16 @@
                 </li>
                 <li class='nav-item nav-text' id=>
 
-                <li class='nav-item'><a href="{% url "social:begin" "spotify" %}">
-                    <i class="nav-link fas fa-sign-in-alt fa-2x"></i></a>
+                <li class='nav-item'>
+                    {% if user.is_authenticated %}
+
+                        <a href="{% url 'logout' %}" class="header-link"><i
+                                class="nav-link fas fa-sign-out-alt fa-2x"></i></a>
+
+                    {% else %}
+                        <a href="{% url "social:begin" "spotify" %}"><i
+                                class="nav-link fas fa-sign-in-alt fa-2x"></i></a>
+                    {% endif %}
 
 
                 </li>
@@ -60,6 +68,7 @@
 
     </div>
 </nav>
+</body>
 <div class="globalContainer container-fluid">
     <section class="row myContent">
         {% block content %}
@@ -75,9 +84,10 @@
                         <p id="footerEmail">BRENNER.SWENSON@GMAIL.COM</p>
                     </div>
                 </div>
-</div>
-</div>
 
-</body>
+            </div>
+        </div>
+    </footer>
+
 
 </html>
