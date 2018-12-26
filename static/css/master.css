@@ -4,8 +4,6 @@
 }
 
 #homeButton {
-    font-size: 1.10rem;
-    color: #ffffff;
     text-align: left;
     font-size: 1.8rem;
     color: rgb(238, 238, 238) !important;
@@ -90,7 +88,6 @@ body {
 
 
 .globalContainer {
-    font-family: 'Lato';
     min-height: 100vh;
     overflow: hidden;
     display: block;
@@ -138,3 +135,4 @@ body {
             font-size: .9rem;
         }
     }
+}
