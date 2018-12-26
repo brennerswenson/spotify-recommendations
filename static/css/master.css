@@ -1,0 +1,741 @@
+.navbar-light {
+    box-shadow: -1px 3px 15px -4px rgba(0, 0, 0, 0.5);
+    background-color: #313131;
+}
+
+#homeButton {
+    font-size: 1.10rem;
+    color: #ffffff;
+    text-align: left;
+    font-size: 1.8rem;
+    color: rgb(238, 238, 238) !important;
+}
+
+#collapsibleNavbar {
+    font-weight: 100;
+}
+
+.nav-text {
+    padding-top: .28rem;
+}
+
+.nav-item {
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+}
+
+#hamburger {
+    color: #ffffff !important;
+}
+
+.navbar-toggler-icon {
+    color: #ffffff;
+}
+
+.nav-link {
+    color: #ffffff !important;
+}
+
+.nav-item {
+    text-align: right;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.myContent {
+    min-height: 84vh;
+    flex: 1 0 auto;
+}
+
+.footer {
+    box-shadow: -1px -5px 11px -5px rgba(0, 0, 0, 0.76);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #313131;
+    left: 0;
+    right: 0;
+}
+
+.fa-envelope {
+    font-size: 1.4rem;
+}
+
+#footerEmail {
+    padding-top: .25rem;
+}
+
+.footerContent {
+    padding-top: .75rem;
+    color: #ffffff;
+    font-weight: 100;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.0rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+*:before, *:after, {
+    box-sizing: border-box;
+}
+
+.headshotContainer {
+    padding-left: 8vw;
+    max-height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.headshot {
+    width: 80%;
+    height: auto;
+}
+
+.text-muted {
+    font-size: 1.2rem;
+}
+
+.aboutMeTextContainer {
+    font-size: 1.3rem;
+    padding-left: 0px;
+    padding-right: 6vw;
+    padding-top: 40px;
+}
+
+.aboutMeText {
+    padding: 5px;
+    font-family: 'Lato'
+}
+
+.globalContainer {
+    font-family: 'Lato';
+    min-height: 100vh;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    padding-bottom: 100px;
+}
+
+.resumeContainer {
+    margin: 40px;
+    border-radius: 20px;
+    box-shadow: inset 1px 0px 15px -13px rgba(129, 129, 129, 1);
+}
+
+.resumeBorderRow {
+    border-bottom: solid #615c5c 3px;
+    width: 55%;
+    float: none;
+    margin: 0 auto;
+}
+
+h1.resumeTitle {
+    position: relative;
+    margin-top: 1%;
+    padding-bottom: 0px;
+}
+
+#resume {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.aboutMeTitle {
+    text-align: center;
+    padding-top: 1.25rem;
+    font-size: 2.75rem;
+    font-weight: 500;
+}
+
+.projectsContainer {
+    text-align: center;
+}
+
+
+.projectsTitle {
+    font-size: 3.25rem;
+    padding-top: 3vh;
+    font-weight: 500;
+}
+
+.projectList {
+    font-size: 25pt;
+    /* border-radius: 20px; */
+    /* box-shadow: inset 1px 0px 30px -13px rgba(129, 129, 129, .2); */
+    margin-right: 10vw;
+    margin-left: 10vw;
+    padding-bottom: 4vh;
+    padding-top: 2vh;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.project {
+    padding: 15px;
+    width: 50vw;
+    display: inline-table;
+    float: none;
+    max-width: 100vw;
+
+}
+
+.btn-primary {
+    background-color: rgba(48, 48, 48, 0.93);
+    box-shadow: -1px 3px 15px -4px rgba(0, 0, 0, 0.5);
+    font-size: 1.3rem;
+    color: #ffffff;
+    font-weight: 100;
+    font-family: 'Lato', sans-serif;
+    white-space: normal !important;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.btn-primary:visited {
+    background-color: rgba(54, 129, 161, 0.84);
+}
+
+.btn-primary:hover {
+    background-color: #2a2828;
+}
+
+.optimizerTitle {
+    padding: 10px;
+    font-weight: 575;
+    font-size: 2.50rem;
+    font-weight: 500
+}
+
+.optimizerCodeColumn {
+    height: 82vh;
+    padding-left: 40px;
+    border-radius: 20px;
+    font-size: .833rem;
+}
+
+.optimizerCodeText {
+    box-shadow: inset 1px 0px 30px -13px rgba(129, 129, 129, 1);
+    border-radius: 20px;
+}
+
+.optimizerExplanationColumn {
+    font-size: 1.15rem;
+    height: 82vh;
+}
+
+.optimizerExplanationText {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #313131;
+    color: #313131;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+.fadedScrollerOptimizer {
+    overflow: auto;
+    position: relative;
+    height: 80vh;
+}
+
+.fadedScrollerOptimizer_fade {
+    content: '';
+    margin-top: -80vh;
+    height: 35px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    position: relative;
+}
+
+.fadedScrollerAboutMe {
+    overflow: auto;
+    position: relative;
+    height: 65vh;
+}
+
+.fadedScrollerAboutMe_fade {
+    content: '';
+    margin-top: -65vh;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    position: relative;
+}
+
+.pdfobject-container {
+    height: 60em;
+    width: 55em;
+    margin: 0 auto;
+}
+
+.pdfobject {
+    border: 1px solid #666;
+    border-radius: 4px;
+}
+
+.optimizerCarousel {
+    padding-top: 50px;
+}
+
+.encrypterTitle {
+    padding: 10px;
+    font-weight: 575;
+}
+
+.encrypterCodeColumn {
+    height: 82vh;
+    padding-left: 40px;
+    border-radius: 20px;
+    font-size: .833rem;
+}
+
+.encrypterCodeText {
+    box-shadow: inset 1px 0px 30px -13px rgba(129, 129, 129, 1);
+    border-radius: 20px;
+}
+
+.encrypterExplanationColumn {
+    font-size: 1.25rem;
+    height: 82vh;
+}
+
+.encrypterExplanationText {
+    padding-left: 30px;
+    padding-right: 30px;
+    box-shadow: inset 1px 0px 20px -13px rgba(129, 129, 129, 1);
+}
+
+.fadedScrollerEncrypter {
+    overflow: auto;
+    position: relative;
+    height: 80vh;
+}
+
+.fadedScrollerEncrypter_fade {
+    content: '';
+    margin-top: -80vh;
+    height: 35px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    position: relative;
+}
+
+.encrypterContentWrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    /*16:9*/
+    padding-top: 40px;
+    height: 0;
+    overflow: hidden;
+}
+
+.encrypterContent {
+    padding-top: 3vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.optimizerMedia {
+    width: 95%;
+    height: auto;
+}
+
+.optimizerVideo {
+    display: flex;
+    width: 46vw;
+    height: 44vh;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 3vw;
+    padding-left: 3vw;
+    padding-bottom: 5vh;
+}
+
+.teslaContainer {
+}
+
+.teslaPresentation {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3vh;
+}
+
+.ebayPresentation {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3vh;
+}
+
+.blackStoneVideo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3vh;
+    width: 1440px;
+    height: 839px;
+}
+
+.marketWrapVideo {
+    display: block;
+    margin-left: 5vw;
+    width: 1440px;
+    height: 830px;
+    margin-top: 2vh;
+}
+
+.projectLink {
+    text-decoration: underline;
+    padding: 15px;
+}
+
+.projectLink:visited {
+    text-decoration: none;
+    color: rgb(147, 119, 176);
+}
+
+.projectLink:hover {
+    text-decoration: underline;
+    color: rgb(17, 115, 47);
+}
+
+.holdbackTitleContainer {
+    padding-top: 5vh;
+    padding-left: 10vw;
+    text-align: left;
+}
+
+.holdbackExcelLink {
+    padding-top: 5vh;
+    font-size: 2.15rem;
+    text-decoration: underline;
+}
+
+.holdbackExcelLink:visited {
+    text-decoration: underline;
+    color: rgb(147, 119, 176);
+}
+
+.holdbackExcelLink:hover {
+    text-decoration: underline;
+    color: rgb(17, 115, 47);
+}
+
+.holdbackBriefExplanation {
+    font-size: 1.5rem;
+    text-align: justify;
+
+}
+
+.holdbackFileDisclaimer {
+    text-align: center;
+}
+
+.holdbackLongExplanation {
+    margin-left: 2vw;
+    margin-right: 2vw;
+    font-style: italic;
+    text-align: left;
+}
+
+.holdbackLongExplanationEnd {
+    font-style: normal;
+}
+
+.holdbackTextContainer {
+    padding-left: 10vw;
+    padding-right: 10vw;
+    font-size: 1.35rem;
+    text-align: justify;
+
+}
+
+.holdbackExcelLink {
+    text-align: center;
+}
+
+.referencesTitleContainer {
+    padding-top: 3vh;
+    padding-left: 5vw;
+    text-align: left;
+}
+
+.referencesTitle {
+    font-size: 2.8rem;
+}
+
+.referencesHeaderText {
+    font-size: 1.35rem;
+    padding-left: 19vw;
+    padding-right: 19vw;
+    padding-bottom: 2vh;
+    padding-top: 2vh;
+    text-align: center;
+}
+
+.recommendationText {
+    margin-left: 4vw;
+    margin-right: 4vw;
+    font-size: 1.2rem;
+    font-style: oblique;
+}
+
+.recommenderHeading {
+    font-size: 1.4rem;
+    font-style: normal;
+}
+
+.fadedScrollerReferences {
+    overflow: auto;
+    position: relative;
+    height: 50vh;
+}
+
+.fadedScrollerReferences_fade {
+    content: '';
+    margin-top: -50vh;
+    height: 35px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    position: relative;
+}
+
+.fa-linkedin {
+    color: rgb(31, 111, 145);
+}
+
+#navLinkedInBtn {
+    color: rgb(238, 238, 238);
+}
+
+#navGithubBtn {
+    color: rgb(238, 238, 238);
+}
+
+.patrickRecommendationContainer {
+    height: 65vh;
+}
+
+.albertRecommendationContainer {
+    height: 65vh;
+}
+
+.recTextContainer {
+    padding-right: 1vw;
+}
+
+.desktopDisclaimer {
+    display: none;
+}
+
+/* Phones */
+
+@media (max-width: 415px) {
+    .footer {
+        /* display: none; */
+    }
+
+    .globalContainer {
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .fadedScrollerAboutMe_fade {
+        background: transparent;
+    }
+
+    .fadedScrollerAboutMe {
+        overflow: hidden;
+        position: relative;
+        height: auto;
+    }
+
+    .aboutMeText {
+        text-align: left;
+        padding-left: 10vw;
+        padding-right: 4vw;
+    }
+
+    .aboutMeTextContainer {
+        display: flex;
+    }
+
+    .headshotContainer {
+        padding-top: 1rem;
+        margin-left: 4vw;
+    }
+
+    .headshot {
+        width: 90%;
+        height: auto;
+    }
+
+    .aboutMeTitleContainer {
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+    }
+
+    .teslaPresentation {
+        height: auto;
+        width: 90%;
+        padding-top: 15vh;
+    }
+
+    .ebayPresentation {
+        height: auto;
+        width: 90%;
+        padding-top: 15vh;
+    }
+
+    .blackStoneVideo {
+        height: auto;
+        width: 90%;
+        padding-top: 15vh;
+    }
+
+    .marketWrapVideo {
+        height: auto;
+        width: 90%;
+        padding-top: 15vh;
+    }
+
+    .projectList {
+        font-size: .8rem;
+        padding-bottom: 4vh;
+        padding-top: 2vh;
+        display: flex;
+        justify-content: center;
+    }
+
+    .projectsButtonContainer {
+        max-width: 80vw;
+    }
+
+    ul {
+        /* list-style-type: none; */
+    }
+
+    .project {
+        width: 30vw;
+        /* display: inline-table; */
+        float: none;
+    }
+
+    .btn-primary {
+        background-color: rgba(48, 48, 48, 0.93);
+        box-shadow: -1px 3px 15px -4px rgba(0, 0, 0, 0.5);
+        font-size: 1.0rem;
+        color: #ffffff;
+        font-weight: 100;
+        font-family: 'Lato', sans-serif;
+        width: 65vw;
+        white-space: normal !important;
+        word-wrap: break-word;
+        text-align: center;
+    }
+
+    .patrickRecommenderHeading {
+        padding-top: 5vh;
+    }
+
+    #patrickRecText {
+        padding-bottom: 10vh;
+    }
+
+    .optimizerExplanationText {
+        padding-left: 3vw;
+        padding-right: 3vw;
+        overflow-x: hidden;
+    }
+
+    .encryperExplanationText {
+        padding-left: 3vw;
+        padding-right: 3vw;
+        overflow-x: hidden;
+    }
+
+    .holdbackBriefExplanation {
+        font-size: 1.5rem;
+        text-align: left;
+
+    }
+
+    .desktopDisclaimer {
+        display: contents;
+        font-style: italic;
+        padding-top: 1vh;
+        font-size: .9rem;
+    }
+
+    /* landscape phones */
+    @media (min-width: 420px) and (max-width: 830px) {
+        .headshot {
+            width: 60%;
+        }
+
+        .fadedScrollerAboutMe {
+            height: 50vh;
+        }
+
+        .fadedScrollerAboutMe_fade {
+            margin-top: -50vh;
+        }
+
+        .teslaPresentation {
+            height: 140%;
+            width: auto;
+            padding-top: 10vh;
+        }
+
+        .ebayPresentation {
+            height: 140%;
+            width: auto;
+            padding-top: 10vh;
+        }
+
+        .blackStoneVideo {
+            height: auto;
+            width: 90%;
+            padding-top: 15vh;
+        }
+
+        .marketWrapVideo {
+            height: auto;
+            width: 90%;
+            padding-top: 15vh;
+        }
+
+        .desktopDisclaimer {
+            display: contents;
+            font-style: italic;
+            padding-top: 1vh;
+            font-size: .9rem;
+        }
+    }
