@@ -124,6 +124,7 @@ SOCIAL_AUTH_SPOTIFY_KEY = os.environ['SPOTIPY_CLIENT_ID']
 SOCIAL_AUTH_SPOTIFY_SECRET = os.environ['SPOTIPY_CLIENT_SECRET']
 
 AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.spotify.SpotifyOAuth2',
 )
 
