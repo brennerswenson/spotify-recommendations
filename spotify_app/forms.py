@@ -10,5 +10,6 @@ class PlaylistForm(forms.ModelForm):
         fields = ['playlist_id']
 
     def clean_id(self):
-        data = self.cleaned_data['playlist_id']
+        data = self.cleaned_data['playlist_id', 'playlist_num_tracks',
+                                 'playlist_url', 'playlist_name']
         return data

@@ -3,14 +3,15 @@ from django.views.generic.edit import FormView, FormMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 from .models import Album, Playlist
-from social_django.models import UserSocialAuth, USER_MODEL
 import spotipy
 import spotipy.util as util
 from .forms import PlaylistForm
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+
 from django.contrib.auth import get_user_model
+from social_django.models import UserSocialAuth
 from django.urls import reverse_lazy
+import os
+from json.decoder import JSONDecodeError
 
 User = get_user_model()
 
@@ -35,33 +36,35 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
+
             instance = form.save(commit=False)
+            instance.playlist_id = instance.playlist_id.split(':')[4] # filter down to the playlist ID
+            scope = 'user-library-read'
+            client_id = os.environ['SPOTIPY_CLIENT_ID']
+            client_secret = os.environ['SPOTIPY_CLIENT_SECRET']
+            redirect_uri = os.environ['SPOTIPY_REDIRECT_URI']
+
+            rec_id = request.user.id
+
+            username = UserSocialAuth.objects.all().filter(id=rec_id)[0].uid
+
+            try:
+                token = util.prompt_for_user_token(username, scope, client_id,
+                                                   client_secret, redirect_uri)
+            except (AttributeError, JSONDecodeError):
+                os.remove(f".cache-{username}")
+                token = util.prompt_for_user_token(username, scope, client_id,
+                                                   client_secret, redirect_uri)
+
+            sp = spotipy.Spotify(auth=token)
+
+            playlist = sp.user_playlist(username, playlist_id=instance.playlist_id)
+            instance.playlist_name = playlist['name']
+            print(instance.playlist_name)
+            instance.playlist_url = playlist['external_urls']['spotify']
+            print(instance.playlist_url)
+            instance.playlist_num_tracks = len(playlist['tracks']['items'])
             instance.save()
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
-
-
-# class PlaylistFormView(FormView):
-#     template_name = 'index.html'
-#     model = Playlist
-#     form_class = PlaylistForm
-#     success_url = '/thanks/'
-
-def get_name(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = PlaylistForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/')
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = PlaylistForm()
-
-    return render(request, 'index.html', {'form': form})
