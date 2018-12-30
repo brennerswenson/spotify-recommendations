@@ -2,6 +2,7 @@ from django.views.generic import TemplateView, DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 from .models import Album, Playlist
+from social_django.models import UserSocialAuth, USER_MODEL
 import spotipy
 import spotipy.util as util
 
