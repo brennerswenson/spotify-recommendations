@@ -20,7 +20,7 @@ from spotify_app.views import PlaylistListView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HomePage.as_view(), name='home'),
-    path('playlists/', PlaylistListView.as_view(), name='playlist_detail'),
+    path('', include('spotify_app.urls', namespace='spotify_app')),
     path('social/', include('social_django.urls')),
     path('', include('django.contrib.auth.urls')),
 ]

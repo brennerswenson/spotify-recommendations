@@ -131,7 +131,7 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_SPOTIFY_SCOPE = ['user-read-email', 'user-library-read']
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/playlists'
 LOGOUT_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_PIPELINE = (

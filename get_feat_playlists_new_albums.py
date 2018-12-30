@@ -1,10 +1,13 @@
-from DSfunctions import *
-from spotify_app.models import Playlist
+import os, django
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "spotify_recs.settings")
+django.setup()
 from social_django.models import UserSocialAuth
+from spotify_app.models import Playlist
 import spotipy
 import spotipy.util as util
 from json.decoder import JSONDecodeError
-import os
+from DSfunctions import *
 
 
 def main():
@@ -25,4 +28,21 @@ def main():
                                            client_secret, redirect_uri)
     sp = spotipy.Spotify(auth=token)
 
+    payload = sp.featured_playlists()['playlists']
 
+    playlist_total = payload['items']
+
+    while payload['next']:
+        payload = sp.next(payload)
+        playlist_total.extend(payload['items'])
+
+    for playlist in playlist_total:
+        temp_obj = Playlist(playlist_id=playlist['id'],
+                            playlist_name=playlist['name'],
+                            playlist_url=playlist['external_urls']['spotify'],
+                            playlist_num_tracks=playlist['tracks']['total'])
+        temp_obj.save()
+
+
+if __name__ == '__main__':
+    main()
