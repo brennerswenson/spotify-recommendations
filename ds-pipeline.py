@@ -1,4 +1,5 @@
 import os
+import sys
 from json.decoder import JSONDecodeError
 
 import spotipy.oauth2
@@ -11,10 +12,8 @@ from sklearn.preprocessing import StandardScaler
 from functions import *
 
 
-def main():
+def main(playlist_id, username):
     all_results = dict()
-    playlist_id = '37i9dQZF1DWUa8ZRTfalHk'
-    username = 'brennerswenson'
     scope = 'user-library-read'
     client_id = os.environ['SPOTIPY_CLIENT_ID']
     client_secret = os.environ['SPOTIPY_CLIENT_SECRET']
@@ -134,4 +133,5 @@ def main():
     print(res)
     return res
 if __name__ == '__main__':
-    main()
+    main(playlist_id=sys.argv[1], username=sys.argv[2])
+
