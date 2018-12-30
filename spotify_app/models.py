@@ -26,8 +26,8 @@ class Song(models.Model):
 
 class Playlist(models.Model):
     playlist_id = models.CharField(max_length=120, primary_key=True)
-    playlist_name = models.TextField(blank=False, null=False)
-    playlist_url = models.CharField(max_length=1000, blank=False, null=False)
-    playlist_num_tracks = models.IntegerField()
+    playlist_name = models.TextField()
+    playlist_url = models.CharField(max_length=1000)
+    playlist_num_tracks = models.IntegerField(null=True)
 
 

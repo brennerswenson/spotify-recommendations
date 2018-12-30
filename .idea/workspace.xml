@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc86f7a2-d5b9-45a3-8ebd-08d79144c410" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/spotify_app/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spotify_app/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache-brennerswenson" beforeDir="false" afterPath="$PROJECT_DIR$/.cache-brennerswenson" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get_featured_playlists.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_feat_playlists_new_albums.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotify_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify_app/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotify_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotify_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify_app/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spotify_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify_app/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spotify_recs/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify_recs/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spotify_recs/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify_recs/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +28,8 @@
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/spotify_app/models.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="990">
-                    <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+                  <state relative-caret-position="900">
+                    <caret line="30" column="55" selection-start-line="30" selection-start-column="55" selection-end-line="30" selection-end-column="55" />
                   </state>
                 </provider>
               </entry>
@@ -55,8 +53,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spotify_app/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+            <state relative-caret-position="450">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -109,17 +107,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spotify_recs/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="972">
-              <caret line="134" column="24" selection-start-line="134" selection-start-column="24" selection-end-line="134" selection-end-column="24" />
+            <state relative-caret-position="912">
+              <caret line="132" column="38" lean-forward="true" selection-start-line="132" selection-start-column="38" selection-end-line="132" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spotify_app/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1092">
-              <caret line="42" column="17" lean-forward="true" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
+            <state relative-caret-position="1170">
+              <caret line="39" column="40" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
               <folding>
                 <element signature="e#0#67#0" expanded="true" />
               </folding>
@@ -127,11 +125,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spotify_app/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+            <state relative-caret-position="210">
+              <caret line="7" column="58" selection-start-line="7" selection-start-column="58" selection-end-line="7" selection-end-column="58" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -173,17 +171,17 @@
         <option value="$PROJECT_DIR$/functions.py" />
         <option value="$PROJECT_DIR$/ds-pipline.py" />
         <option value="$PROJECT_DIR$/ds-pipeline.py" />
-        <option value="$PROJECT_DIR$/spotify_app/models.py" />
         <option value="$PROJECT_DIR$/spotify_app/admin.py" />
         <option value="$PROJECT_DIR$/spotify_app/get_featured_playlists.py" />
-        <option value="$PROJECT_DIR$/spotify_recs/settings.py" />
         <option value="$PROJECT_DIR$/get_featured_playlists.py" />
         <option value="$PROJECT_DIR$/get_feat_playlists_new_albums.py" />
-        <option value="$PROJECT_DIR$/spotify_app/views.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/spotify_app/forms.py" />
         <option value="$PROJECT_DIR$/spotify_recs/urls.py" />
         <option value="$PROJECT_DIR$/spotify_app/urls.py" />
+        <option value="$PROJECT_DIR$/spotify_recs/settings.py" />
+        <option value="$PROJECT_DIR$/spotify_app/forms.py" />
+        <option value="$PROJECT_DIR$/spotify_app/models.py" />
+        <option value="$PROJECT_DIR$/spotify_app/views.py" />
       </list>
     </option>
   </component>
@@ -212,6 +210,12 @@
               <item name="spotify_recs" type="b2602c69:ProjectViewProjectNode" />
               <item name="spotify_recs" type="462c0819:PsiDirectoryNode" />
               <item name="spotify_app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spotify_recs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spotify_recs" type="462c0819:PsiDirectoryNode" />
+              <item name="spotify_app" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="spotify_recs" type="b2602c69:ProjectViewProjectNode" />
@@ -318,18 +322,18 @@
       <workItem from="1546187138891" duration="182000" />
       <workItem from="1546187338637" duration="9347000" />
       <workItem from="1546197879021" duration="557000" />
-      <workItem from="1546198460647" duration="5785000" />
+      <workItem from="1546198460647" duration="8212000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51627000" />
+    <option name="totallyTimeSpent" value="54054000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3840" y="-583" width="1920" height="2137" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1256656" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1256656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -343,7 +347,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.14696486" side_tool="true" visible="true" weight="0.21094134" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.85303515" visible="true" weight="0.21094134" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.85303515" visible="true" weight="0.21094134" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -447,13 +451,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spotify_recs/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="972">
-          <caret line="134" column="24" selection-start-line="134" selection-start-column="24" selection-end-line="134" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/get_feat_playlists_new_albums.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1109">
@@ -461,17 +458,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spotify_app/models.py">
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        <state relative-caret-position="840">
+          <caret line="28" column="52" selection-start-line="28" selection-start-column="52" selection-end-line="28" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spotify_recs/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="e#636#668#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spotify_app/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="7" column="58" selection-start-line="7" selection-start-column="58" selection-end-line="7" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spotify_recs/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="912">
+          <caret line="132" column="38" lean-forward="true" selection-start-line="132" selection-start-column="38" selection-end-line="132" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spotify_app/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        <state relative-caret-position="450">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
@@ -488,39 +512,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spotify_recs/urls.py">
+    <entry file="file://$PROJECT_DIR$/spotify_app/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="e#636#668#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="28" column="52" selection-start-line="28" selection-start-column="52" selection-end-line="28" selection-end-column="52" />
+        <state relative-caret-position="900">
+          <caret line="30" column="55" selection-start-line="30" selection-start-column="55" selection-end-line="30" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spotify_app/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1092">
-          <caret line="42" column="17" lean-forward="true" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
+        <state relative-caret-position="1170">
+          <caret line="39" column="40" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
           <folding>
             <element signature="e#0#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spotify_app/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
