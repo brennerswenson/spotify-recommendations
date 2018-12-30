@@ -3,7 +3,24 @@
 {% block content %}
 
     {% if user.is_authenticated %}
-
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="jumbotron">
+                        <h1 class="display-4">Spotify Song Recommender</h1>
+                        <p>Choose a playlist you'd like to get recommendations from</p>
+                        <p class="lead">Here is a list of Spotify's featured playlists right now:</p>
+                        {% for playlist in object_list %}
+                            <ul>
+                                <a href="{{ playlist.playlist_url }}">
+                                    <li>{{ playlist.playlist_name }}</li>
+                                </a>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
     {% else %}
         <div class="container-fluid">
