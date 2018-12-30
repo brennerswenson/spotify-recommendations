@@ -132,6 +132,7 @@ def main(playlist_id, username):
 
     print(res)
     return res
+
+
 if __name__ == '__main__':
     main(playlist_id=sys.argv[1], username=sys.argv[2])
-

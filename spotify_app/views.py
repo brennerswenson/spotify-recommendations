@@ -38,7 +38,7 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
         if form.is_valid():
 
             instance = form.save(commit=False)
-            instance.playlist_id = instance.playlist_id.split(':')[4] # filter down to the playlist ID
+            instance.playlist_id = instance.playlist_id.split(':')[4]  # filter down to the playlist ID
             scope = 'user-library-read'
             client_id = os.environ['SPOTIPY_CLIENT_ID']
             client_secret = os.environ['SPOTIPY_CLIENT_SECRET']
@@ -46,6 +46,8 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
 
             rec_id = request.user.id
 
+            # get spotify username based on admin userID
+            # don't know if this is going to work with someone other than myself
             username = UserSocialAuth.objects.all().filter(id=rec_id)[0].uid
 
             try:

@@ -1,9 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
-
-
 class Artist(models.Model):
     artist_id = models.CharField(max_length=500, primary_key=True)
 
@@ -29,5 +26,3 @@ class Playlist(models.Model):
     playlist_name = models.TextField(max_length=100)
     playlist_url = models.CharField(max_length=1000)
     playlist_num_tracks = models.IntegerField(null=True)
-
-
