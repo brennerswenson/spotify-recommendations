@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Album, Playlist
 import spotipy
 import spotipy.util as util
-from .forms import PlaylistForm
+from .forms import PlaylistInputForm
 
 from django.contrib.auth import get_user_model
 from social_django.models import UserSocialAuth
@@ -13,12 +13,12 @@ from django.urls import reverse_lazy
 import os
 from json.decoder import JSONDecodeError
 import get_feat_playlists_new_albums
+from django.http import HttpResponse
+from django.shortcuts import render
+
+import ds_pipeline as ds
 
 User = get_user_model()
-
-
-class HomeTemplateView(TemplateView):
-    template_name = 'index.html'
 
 
 class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
@@ -27,7 +27,7 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
     model = Playlist
     template_name = 'index.html'
     queryset = Playlist.objects.all()
-    form_class = PlaylistForm
+    form_class = PlaylistInputForm
     success_url = reverse_lazy('spotify_app:playlist_list')
 
     def get_context_data(self, **kwargs):
@@ -39,7 +39,7 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
-
+            print(dir(request))
             instance = form.save(commit=False)
             instance.playlist_id = instance.playlist_id.split(':')[4]  # filter down to the playlist ID
             scope = 'user-library-read'
@@ -76,3 +76,20 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+
+
+def recommendations(request, playlist_id):
+    rec_id = request.user.id
+
+    try:
+        username = UserSocialAuth.objects.all().filter(id=rec_id)[0].uid
+    except IndexError:
+        username = 'brennerswenson'
+
+    print('starting recommendations')
+    print(playlist_id)
+    song_recommendations = ds.main(playlist_id, username) # actually make recommendations
+
+    print(song_recommendations)
+
+    return render(request, 'recommendations.html')

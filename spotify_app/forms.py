@@ -2,8 +2,9 @@ from django import forms
 from .models import Playlist
 
 
-class PlaylistForm(forms.ModelForm):
-    playlist_id = forms.CharField(label='Spotify Playlist URI', max_length=500)
+class PlaylistInputForm(forms.ModelForm):
+    playlist_id = forms.CharField(label='Spotify Playlist URI', max_length=500,
+                                  widget=forms.TextInput(attrs={'placeholder': 'Paste the URI here'}))
 
     class Meta:
         model = Playlist

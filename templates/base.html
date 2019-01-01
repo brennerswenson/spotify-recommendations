@@ -24,12 +24,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
+    <script>
+
+        function getURI(id) {
+            console.log(document.getElementById(id).id);
+            return document.getElementById(id).id;
+        }
+
+    </script>
+
 </head>
 
 <body>
 <nav class="navbar navbar-expand-sm navbar-light" role='navigation' id='navbar'>
     <div class="container">
-        <a href="{% url 'home' %}" class="navbar-brand nav-link fas fa-home fa-1x" id='homeButton'><i></i></a>
+        <a href="
+
+                {% if user.is_authenticated %}{% url 'spotify_app:playlist_list' %} {% else %} {% url 'home' %} {% endif %}"
+           class="navbar-brand nav-link fas fa-home fa-1x" id='homeButton'><i></i></a>
         <button class="navbar-toggler navbar-toggle" type="button" data-toggle="collapse"
                 data-target="#collapsibleNavbar" id="hamburger"><i class="fas fa-bars hamburger"></i>
         </button>

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+
 {% block content %}
 
     {% if user.is_authenticated %}
@@ -18,8 +19,12 @@
                                 {% for playlist in object_list %}
                                     {% if playlist.playlist_featured %}
                                         <ul>
-                                            <a href="{{ playlist.playlist_url }}">
-                                                <li>{{ playlist.playlist_name }}</li>
+                                            <a href="{% url "spotify_app:recommendations" playlist.playlist_id %}">
+                                            <button type="button" id="{{ playlist.playlist_id }}"
+                                            class="btn btn-success">
+                                            {{ playlist.playlist_name }} [{{ playlist.playlist_num_tracks }}
+                                            songs]
+                                            </button>
                                             </a>
                                         </ul>
                                     {% endif %}
@@ -33,7 +38,7 @@
                                 <form method="post">
                                     {% csrf_token %}
                                     {{ form.as_p }}
-                                    <input type="submit" value="submit">
+                                    <input type="submit" value="Submit" class="btn btn-primary">
                                 </form>
 
                             </div>
