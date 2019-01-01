@@ -19,12 +19,12 @@
                                 {% for playlist in object_list %}
                                     {% if playlist.playlist_featured %}
                                         <ul>
-                                            <a href="{% url "spotify_app:recommendations" playlist.playlist_id %}">
-                                            <button type="button" id="{{ playlist.playlist_id }}"
-                                            class="btn btn-success">
-                                            {{ playlist.playlist_name }} [{{ playlist.playlist_num_tracks }}
-                                            songs]
-                                            </button>
+                                            <a href="{% url "spotify_app:playlist_detail" playlist.playlist_id %}">
+                                                <button type="button" id="{{ playlist.playlist_id }}"
+                                                        class="btn btn-success">
+                                                    {{ playlist.playlist_name }} [{{ playlist.playlist_num_tracks }}
+                                                    songs]
+                                                </button>
                                             </a>
                                         </ul>
                                     {% endif %}

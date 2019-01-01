@@ -46,7 +46,8 @@ def main():
                             playlist_name=playlist['name'],
                             playlist_url=playlist['external_urls']['spotify'],
                             playlist_num_tracks=playlist['tracks']['total'],
-                            playlist_featured=True)
+                            playlist_featured=True,
+                            playlist_owner=playlist['owner']['display_name'].lower())
         temp_obj.save()
 
 

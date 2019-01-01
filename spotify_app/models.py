@@ -3,6 +3,7 @@ from django.db import models
 
 class Artist(models.Model):
     artist_id = models.CharField(max_length=500, primary_key=True)
+    artist_followers = models.IntegerField(max_length=1000)
 
 
 class Album(models.Model):
@@ -33,7 +34,7 @@ class Playlist(models.Model):
     playlist_url = models.CharField(max_length=1000)
     playlist_num_tracks = models.IntegerField(null=True)
     playlist_featured = models.BooleanField(default=False)
+    playlist_owner = models.CharField(max_length=500)
 
     def __str__(self):
         return self.playlist_name
-

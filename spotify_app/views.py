@@ -2,7 +2,7 @@ from django.views.generic import TemplateView, DetailView, ListView
 from django.views.generic.edit import FormView, FormMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
-from .models import Album, Playlist
+from .models import Album, Playlist, Song
 import spotipy
 import spotipy.util as util
 from .forms import PlaylistInputForm
@@ -78,18 +78,29 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
             return self.form_invalid(form)
 
 
-def recommendations(request, playlist_id):
-    rec_id = request.user.id
+def playlist_detail(request, playlist_id):
 
-    try:
-        username = UserSocialAuth.objects.all().filter(id=rec_id)[0].uid
-    except IndexError:
-        username = 'brennerswenson'
+    chosen_playlist = Playlist.objects.all().filter(id=playlist_id)
 
-    print('starting recommendations')
+    request.owner = chosen_playlist.playlist_owner
+
+
     print(playlist_id)
-    song_recommendations = ds.main(playlist_id, username) # actually make recommendations
-
-    print(song_recommendations)
 
     return render(request, 'recommendations.html')
+
+
+# FINISH THIS LATER! FIGURE OUT HOW TO STORE RECOMMENDED SONGS IN DB AND LIST THEM OUT
+class RecommendationsListView(ListView):
+    template_name = 'recommendations.html'
+    model = Song
+    playlist_id = None
+
+    # def get_queryset(self):
+    #     return Playlist.objects.filter(playlist_id=self.kwargs['playlist_id'])
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['chosen_playlist'] = Playlist.objects.get(playlist_id=self.kwargs['playlist_id'])
+
+        return context
