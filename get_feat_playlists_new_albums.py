@@ -16,8 +16,11 @@ def main():
     client_secret = os.environ['SPOTIPY_CLIENT_SECRET']
     redirect_uri = os.environ['SPOTIPY_REDIRECT_URI']
 
-    # kind of dynamic way to get username, not really
-    username = UserSocialAuth.objects.all().filter(id=1)[0].uid
+    try:
+        # kind of dynamic way to get username, not really
+        username = UserSocialAuth.objects.all().filter(id=1)[0].uid
+    except IndexError:
+        username = 'brennerswenson'
 
     try:
         token = util.prompt_for_user_token(username, scope, client_id,
@@ -36,11 +39,14 @@ def main():
         payload = sp.next(payload)
         playlist_total.extend(payload['items'])
 
+    print('Getting featured playlists...')
+
     for playlist in playlist_total:
         temp_obj = Playlist(playlist_id=playlist['id'],
                             playlist_name=playlist['name'],
                             playlist_url=playlist['external_urls']['spotify'],
-                            playlist_num_tracks=playlist['tracks']['total'])
+                            playlist_num_tracks=playlist['tracks']['total'],
+                            playlist_featured=True)
         temp_obj.save()
 
 

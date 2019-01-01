@@ -16,11 +16,13 @@
                                 <p class="lead">Here is a list of Spotify's featured playlists right now:</p>
 
                                 {% for playlist in object_list %}
-                                    <ul>
-                                        <a href="{{ playlist.playlist_url }}">
-                                            <li>{{ playlist.playlist_name }}</li>
-                                        </a>
-                                    </ul>
+                                    {% if playlist.playlist_featured %}
+                                        <ul>
+                                            <a href="{{ playlist.playlist_url }}">
+                                                <li>{{ playlist.playlist_name }}</li>
+                                            </a>
+                                        </ul>
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                             <div class="col-md-6">

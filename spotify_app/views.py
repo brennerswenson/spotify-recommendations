@@ -12,6 +12,7 @@ from social_django.models import UserSocialAuth
 from django.urls import reverse_lazy
 import os
 from json.decoder import JSONDecodeError
+import get_feat_playlists_new_albums
 
 User = get_user_model()
 
@@ -21,6 +22,8 @@ class HomeTemplateView(TemplateView):
 
 
 class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
+    get_feat_playlists_new_albums.main()  # get featured playlists on launch
+
     model = Playlist
     template_name = 'index.html'
     queryset = Playlist.objects.all()
@@ -48,7 +51,10 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
 
             # get spotify username based on admin userID
             # don't know if this is going to work with someone other than myself
-            username = UserSocialAuth.objects.all().filter(id=rec_id)[0].uid
+            try:
+                username = UserSocialAuth.objects.all().filter(id=rec_id)[0].uid
+            except IndexError:
+                username = 'brennerswenson'
 
             try:
                 token = util.prompt_for_user_token(username, scope, client_id,
