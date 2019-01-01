@@ -15,6 +15,7 @@ from json.decoder import JSONDecodeError
 import get_feat_playlists_new_albums
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.shortcuts import redirect
 
 import ds_pipeline as ds
 
@@ -72,32 +73,18 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
             instance.playlist_url = playlist['external_urls']['spotify']
             print(instance.playlist_url)
             instance.playlist_num_tracks = len(playlist['tracks']['items'])
+            instance.playlist_owner = playlist['owner']['display_name']
             instance.save()
-            return self.form_valid(form)
+            return redirect('spotify_app:playlist_detail', playlist_id=instance.playlist_id)
         else:
             return self.form_invalid(form)
 
 
-def playlist_detail(request, playlist_id):
-
-    chosen_playlist = Playlist.objects.all().filter(id=playlist_id)
-
-    request.owner = chosen_playlist.playlist_owner
-
-
-    print(playlist_id)
-
-    return render(request, 'recommendations.html')
-
-
 # FINISH THIS LATER! FIGURE OUT HOW TO STORE RECOMMENDED SONGS IN DB AND LIST THEM OUT
-class RecommendationsListView(ListView):
+class ChosenPlaylistListView(ListView):
     template_name = 'recommendations.html'
-    model = Song
+    model = Playlist
     playlist_id = None
-
-    # def get_queryset(self):
-    #     return Playlist.objects.filter(playlist_id=self.kwargs['playlist_id'])
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

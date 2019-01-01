@@ -3,7 +3,7 @@ from django.db import models
 
 class Artist(models.Model):
     artist_id = models.CharField(max_length=500, primary_key=True)
-    artist_followers = models.IntegerField(max_length=1000)
+    artist_followers = models.IntegerField()
 
 
 class Album(models.Model):
