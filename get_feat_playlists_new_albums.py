@@ -7,7 +7,6 @@ from spotify_app.models import Playlist
 import spotipy
 import spotipy.util as util
 from json.decoder import JSONDecodeError
-from DSfunctions import *
 
 
 def main():
@@ -31,6 +30,8 @@ def main():
                                            client_secret, redirect_uri)
     sp = spotipy.Spotify(auth=token)
 
+    print('Getting featured playlists...')
+
     payload = sp.featured_playlists()['playlists']
 
     playlist_total = payload['items']
@@ -39,7 +40,7 @@ def main():
         payload = sp.next(payload)
         playlist_total.extend(payload['items'])
 
-    print('Getting featured playlists...')
+
 
     for playlist in playlist_total:
         temp_obj = Playlist(playlist_id=playlist['id'],

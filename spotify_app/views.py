@@ -91,3 +91,29 @@ class ChosenPlaylistListView(ListView):
         context['chosen_playlist'] = Playlist.objects.get(playlist_id=self.kwargs['playlist_id'])
 
         return context
+
+
+class RecommendationsView(ListView):
+    template_name = 'recommendations.html'
+    model = Playlist
+    playlist_id = None
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['chosen_playlist'] = Playlist.objects.get(playlist_id=self.kwargs['playlist_id'])
+
+        rec_id = self.request.user.id
+
+        print('getting recs')
+
+        try:
+            username = UserSocialAuth.objects.all().filter(id=rec_id)[0].uid
+        except IndexError:
+            username = 'brennerswenson'
+
+        recs = ds.main(playlist_id=context['chosen_playlist'].playlist_id, username=username)
+
+
+        print(recs)
+
+        return context

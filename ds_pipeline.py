@@ -93,6 +93,9 @@ def main(playlist_id, username):
 
     X_test['CENTROID'] = test_labels  # assign centroid labels to the test data df
 
+    import pdb
+    pdb.set_trace()
+
     # get all songs from selected playlist
     playlist_results, playlist_df = get_playlist_tracks(username, playlist_id, sp)
 
