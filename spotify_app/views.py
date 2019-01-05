@@ -2,7 +2,7 @@ from django.views.generic import TemplateView, DetailView, ListView
 from django.views.generic.edit import FormView, FormMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
-from .models import Album, Playlist, Song
+from .models import Playlist, Song
 import spotipy
 import spotipy.util as util
 from .forms import PlaylistInputForm
@@ -16,6 +16,7 @@ import get_feat_playlists_new_albums
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
+import time
 
 import ds_pipeline as ds
 
@@ -33,14 +34,13 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['playlists'] = Playlist.objects.all()
+        context['playlists'] = Playlist.objects.all().order_by('date_created')[::-1]
         context['form'] = self.get_form()
         return context
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
-            print(dir(request))
             instance = form.save(commit=False)
             instance.playlist_id = instance.playlist_id.split(':')[4]  # filter down to the playlist ID
             scope = 'user-library-read'
@@ -74,6 +74,7 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
             print(instance.playlist_url)
             instance.playlist_num_tracks = len(playlist['tracks']['items'])
             instance.playlist_owner = playlist['owner']['display_name']
+            instance.date_created = time.time()
             instance.save()
             return redirect('spotify_app:playlist_detail', playlist_id=instance.playlist_id)
         else:
@@ -102,18 +103,55 @@ class RecommendationsView(ListView):
         context = super().get_context_data(**kwargs)
         context['chosen_playlist'] = Playlist.objects.get(playlist_id=self.kwargs['playlist_id'])
 
+        scope = 'user-library-read'
+        client_id = os.environ['SPOTIPY_CLIENT_ID']
+        client_secret = os.environ['SPOTIPY_CLIENT_SECRET']
+        redirect_uri = os.environ['SPOTIPY_REDIRECT_URI']
+
         rec_id = self.request.user.id
 
-        print('getting recs')
+        print('=> starting recommendations\n')
 
         try:
             username = UserSocialAuth.objects.all().filter(id=rec_id)[0].uid
         except IndexError:
             username = 'brennerswenson'
 
-        recs = ds.main(playlist_id=context['chosen_playlist'].playlist_id, username=username)
+        try:
+            token = util.prompt_for_user_token(username, scope, client_id,
+                                               client_secret, redirect_uri)
+        except (AttributeError, JSONDecodeError):
+            os.remove(f".cache-{username}")
+            token = util.prompt_for_user_token(username, scope, client_id,
+                                               client_secret, redirect_uri)
 
+        recs = ds.main(playlist_id=context['chosen_playlist'].playlist_id, username=username)
+        sp = spotipy.Spotify(auth=token)
+        context['active_user'] = username
+
+        if recs.shape[0] > 0:
+            print("=> creating Song db objects")
+            print("=> recommendations df shape {}".format(recs.shape))
+            rec_tracks = sp.tracks(recs.index.values)
+
+            for i, rec in recs.iterrows():
+                print('=> current index is {}'.format(i))
+                tmp_song = Song()
+                tmp_song.song_id = i
+                tmp_song.song_name = rec_tracks['tracks'][recs.index.get_loc(i)]['name']
+                tmp_song.artist_name = rec_tracks['tracks'][recs.index.get_loc(i)]['artists'][0]['name']
+                tmp_song.song_is_explicit = recs.loc[i, :]['explicit']
+                tmp_song.song_popularity = recs.loc[i, :]['popularity']
+                tmp_song.song_duration_ms = recs.loc[i, :]['duration_ms']
+                tmp_song.recommended_user = username
+                tmp_song.date_created = time.time()
+                tmp_song.save()
+            context['script_ran'] = True
+        else:
+            print('=> no recommendations!')
 
         print(recs)
+
+        context['recs'] = Song.objects.all().filter(recommended_user=username)
 
         return context

@@ -18,14 +18,6 @@
                                         width="500" height="600"
                                         frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
-
-                                <script>$('.btn').on('click', function () {
-                                    var $this = $(this);
-                                    $this.button('loading');
-                                    setTimeout(function () {
-                                        $this.button('reset');
-                                    }, 8000);
-                                });</script>
                             </div>
                             <div class="col-md-6">
 
@@ -43,6 +35,20 @@
                                                                value="Get recommendations"/></a>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
+                                            {% if script_ran %}
+                                                {% for rec in recs %}
+                                                    {% if rec.recommended_user == active_user %}
+                                                        <button type="button"
+                                                                class="btn btn-success">
+                                                            {{ rec.song_name }}
+                                                            -
+                                                            {{ rec.artist_name }}
+                                                        </button>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
