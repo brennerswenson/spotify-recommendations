@@ -42,7 +42,8 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
         form = self.get_form()
         if form.is_valid():
             instance = form.save(commit=False)
-            instance.playlist_id = instance.playlist_id.split(':')[4]  # filter down to the playlist ID
+            instance.playlist_id = instance.playlist_id.split(':')[
+                4]  # filter down to the playlist ID
             scope = 'user-library-read'
             client_id = os.environ['SPOTIPY_CLIENT_ID']
             client_secret = os.environ['SPOTIPY_CLIENT_SECRET']
@@ -53,7 +54,8 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
             # get spotify username based on admin userID
             # don't know if this is going to work with someone other than myself
             try:
-                username = UserSocialAuth.objects.all().filter(id=rec_id)[0].uid
+                username = UserSocialAuth.objects.all().filter(
+                    id=rec_id)[0].uid
             except IndexError:
                 username = 'brennerswenson'
 
@@ -67,7 +69,8 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
 
             sp = spotipy.Spotify(auth=token)
 
-            playlist = sp.user_playlist(username, playlist_id=instance.playlist_id)
+            playlist = sp.user_playlist(
+                username, playlist_id=instance.playlist_id)
             instance.playlist_name = playlist['name']
             print(instance.playlist_name)
             instance.playlist_url = playlist['external_urls']['spotify']
@@ -76,7 +79,9 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
             instance.playlist_owner = playlist['owner']['display_name']
             instance.date_created = time.time()
             instance.save()
-            return redirect('spotify_app:playlist_detail', playlist_id=instance.playlist_id)
+            return redirect(
+                'spotify_app:playlist_detail',
+                playlist_id=instance.playlist_id)
         else:
             return self.form_invalid(form)
 
@@ -89,7 +94,8 @@ class ChosenPlaylistListView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['chosen_playlist'] = Playlist.objects.get(playlist_id=self.kwargs['playlist_id'])
+        context['chosen_playlist'] = Playlist.objects.get(
+            playlist_id=self.kwargs['playlist_id'])
 
         return context
 
@@ -101,7 +107,8 @@ class RecommendationsView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['chosen_playlist'] = Playlist.objects.get(playlist_id=self.kwargs['playlist_id'])
+        context['chosen_playlist'] = Playlist.objects.get(
+            playlist_id=self.kwargs['playlist_id'])
 
         scope = 'user-library-read'
         client_id = os.environ['SPOTIPY_CLIENT_ID']
@@ -125,7 +132,9 @@ class RecommendationsView(ListView):
             token = util.prompt_for_user_token(username, scope, client_id,
                                                client_secret, redirect_uri)
 
-        recs = ds.main(playlist_id=context['chosen_playlist'].playlist_id, username=username)
+        recs = ds.main(
+            playlist_id=context['chosen_playlist'].playlist_id,
+            username=username)
         sp = spotipy.Spotify(auth=token)
         context['active_user'] = username
 
@@ -138,14 +147,17 @@ class RecommendationsView(ListView):
                 print('=> current index is {}'.format(i))
                 tmp_song = Song()
                 tmp_song.song_id = i
-                tmp_song.song_name = rec_tracks['tracks'][recs.index.get_loc(i)]['name']
-                tmp_song.artist_name = rec_tracks['tracks'][recs.index.get_loc(i)]['artists'][0]['name']
+                tmp_song.song_name = rec_tracks['tracks'][recs.index.get_loc(
+                    i)]['name']
+                tmp_song.artist_name = rec_tracks['tracks'][recs.index.get_loc(
+                    i)]['artists'][0]['name']
                 tmp_song.song_is_explicit = recs.loc[i, :]['explicit']
                 tmp_song.song_popularity = recs.loc[i, :]['popularity']
                 tmp_song.song_duration_ms = recs.loc[i, :]['duration_ms']
                 tmp_song.recommended_user = username
                 tmp_song.date_created = time.time()
-                tmp_song.parent_playlist_id = context['chosen_playlist'].playlist_id
+                tmp_song.parent_playlist_id = context[
+                    'chosen_playlist'].playlist_id
                 tmp_song.save()
             context['script_ran'] = True
             context['no_recommendations'] = False
