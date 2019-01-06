@@ -25,7 +25,8 @@
                                 <div class="container-fluid row ">
                                     <div class="container">
                                         <div class="row">
-                                            <div class="col-xs-12 button-holder">
+                                            {% if not script_ran and not remove_rec_button %}
+                                                <div class="col-xs-12 button-holder">
                                                 <div class="ajax-button">
                                                     <div class="fa fa-check done"></div>
                                                     <div class="fa fa-close failed"></div>
@@ -34,31 +35,56 @@
                                                         <input id="submit" class="submit" type="button"
                                                                value="Get recommendations"/></a>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            {% if script_ran %}
+                                            {% elif script_ran %}
                                                 {% for rec in recs %}
-                                                    {% if rec.recommended_user == active_user %}
-                                                        <button type="button"
-                                                                class="btn btn-success">
-                                                            {{ rec.song_name }}
-                                                            -
-                                                            {{ rec.artist_name }}
-                                                        </button>
+                                                    {% if rec.recommended_user == active_user and rec.parent_playlist_id == chosen_playlist.playlist_id %}
+                                                        <ul class="rec-list">
+                                                            <a target="_blank"
+                                                               href="https://open.spotify.com/track/{{ rec.song_id }}">
+                                                                <button type="button"
+                                                                        class="btn btn-success">
+                                                                    {{ rec.song_name }}
+                                                                    by
+                                                                    {{ rec.artist_name }}
+                                                                </button>
+                                                            </a>
+                                                        </ul>
                                                     {% endif %}
                                                 {% endfor %}
                                             {% endif %}
+                                            {% if no_recommendations %}
+                                                <div class="row">
+                                                <h4>No recommendations! Try again</h4>
+                                                <div class="col-xs-12 button-holder">
+                                                <div class="ajax-button">
+                                                    <div class="fa fa-check done"></div>
+                                                    <div class="fa fa-close failed"></div>
+                                                    <a href="
+                                        {% url "spotify_app:playlist_list" %}">
+                                                        <input id="submit" class="submit" type="button"
+                                                               value="Back to Playlists"/></a>
+                                                </div>
+
+                                            {% endif %}
+                                            </div>
+                                            </div>
+                                            </div>
+                                            <div class="container-fluid row ">
+                                                <div class="container">
+                                                    <div class="row">
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
 
     {% else %}
@@ -78,3 +104,4 @@
         </div>
     {% endif %}
 {% endblock content %}
+

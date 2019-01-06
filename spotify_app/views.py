@@ -28,13 +28,13 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
 
     model = Playlist
     template_name = 'index.html'
-    queryset = Playlist.objects.all()
+    queryset = Playlist.objects.all().order_by('-date_created')[0:11]
     form_class = PlaylistInputForm
     success_url = reverse_lazy('spotify_app:playlist_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['playlists'] = Playlist.objects.all().order_by('date_created')[::-1]
+        context['playlists'] = Playlist.objects.all()
         context['form'] = self.get_form()
         return context
 
@@ -145,9 +145,13 @@ class RecommendationsView(ListView):
                 tmp_song.song_duration_ms = recs.loc[i, :]['duration_ms']
                 tmp_song.recommended_user = username
                 tmp_song.date_created = time.time()
+                tmp_song.parent_playlist_id = context['chosen_playlist'].playlist_id
                 tmp_song.save()
             context['script_ran'] = True
+            context['no_recommendations'] = False
         else:
+            context['remove_rec_button'] = True
+            context['no_recommendations'] = True
             print('=> no recommendations!')
 
         print(recs)

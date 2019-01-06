@@ -58,6 +58,10 @@ body {
     right: 0;
 }
 
+.rec-list {
+    overflow-y: scroll;
+}
+
 .fa-envelope {
     font-size: 1.4rem;
 }

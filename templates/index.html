@@ -16,7 +16,7 @@
                                     you'll like the most!</p>
                                 <p class="lead">Here is a list of Spotify's featured playlists right now:</p>
 
-                                {% for playlist in object_list|slice:"11" %}
+                                {% for playlist in object_list %}
                                     {% if playlist.playlist_featured %}
                                         <ul>
                                             <a href="{% url "spotify_app:playlist_detail" playlist.playlist_id %}">
@@ -45,6 +45,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
