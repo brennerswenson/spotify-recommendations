@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:100,600,400);
+
 .navbar-light {
     box-shadow: -1px 3px 15px -4px rgba(0, 0, 0, 0.5);
     background-color: #313131;
@@ -48,6 +50,11 @@ body {
     flex: 1 0 auto;
 }
 
+.text {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.25rem;
+}
+
 .footer {
     box-shadow: -1px -5px 11px -5px rgba(0, 0, 0, 0.76);
     position: absolute;
@@ -60,6 +67,42 @@ body {
 
 .rec-list {
     overflow-y: scroll;
+}
+
+.playlist-item {
+    border-radius: 5px;
+    -webkit-box-shadow: 2px 4px 12px -4px rgba(0, 0, 0, 0.56);
+    -moz-box-shadow: 2px 4px 12px -4px rgba(0, 0, 0, 0.56);
+    box-shadow: 2px 4px 12px -4px rgba(0, 0, 0, 0.56);
+    background-color: #313131;
+    border-color: #313131;
+
+}
+
+.embedded-playlist {
+    border-radius: 5px;
+    -webkit-box-shadow: 2px 4px 12px 3px rgba(0, 0, 0, 0.56);
+    -moz-box-shadow: 2px 4px 12px 3px rgba(0, 0, 0, 0.56);
+    box-shadow: 2px 4px 12px 3px rgba(0, 0, 0, 0.56);
+}
+
+.recommendation-text {
+    margin-left: -10vw;
+    margin-top: 2vh;
+    font-size: 1.2rem;
+    font-family: 'Raleway', sans-serif;
+}
+
+.recommendations-title {
+    margin-top: -2vh;
+    margin-bottom: 2vh;
+    font-family: 'Raleway', sans-serif;
+    font-weight: normal;
+
+}
+
+.no-rec-header {
+    font-family: 'Raleway', sans-serif;
 }
 
 .fa-envelope {
