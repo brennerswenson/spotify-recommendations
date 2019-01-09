@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.db import models
+from django.contrib.sessions.models import Session
 
 
 class Playlist(models.Model):
@@ -33,3 +35,4 @@ class Song(models.Model):
 
     def __str__(self):
         return self.song_name
+

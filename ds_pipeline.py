@@ -12,20 +12,8 @@ from sklearn.preprocessing import StandardScaler
 from DSfunctions import *
 
 
-def main(playlist_id, username):
+def main(playlist_id, username, token):
     all_results = dict()
-    scope = 'user-library-read'
-    client_id = os.environ['SPOTIPY_CLIENT_ID']
-    client_secret = os.environ['SPOTIPY_CLIENT_SECRET']
-    redirect_uri = os.environ['SPOTIPY_REDIRECT_URI']
-
-    try:
-        token = util.prompt_for_user_token(username, scope, client_id,
-                                           client_secret, redirect_uri)
-    except (AttributeError, JSONDecodeError):
-        os.remove(f".cache-{username}")
-        token = util.prompt_for_user_token(username, scope, client_id,
-                                           client_secret, redirect_uri)
 
     sp = spotipy.Spotify(auth=token)  # create spotify object
 

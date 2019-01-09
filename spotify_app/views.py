@@ -1,24 +1,18 @@
-from django.views.generic import TemplateView, DetailView, ListView
-from django.views.generic.edit import FormView, FormMixin
-from django.contrib.auth.mixins import LoginRequiredMixin
-# Create your views here.
-from .models import Playlist, Song
-import spotipy
-import spotipy.util as util
-from .forms import PlaylistInputForm
-
-from django.contrib.auth import get_user_model
-from social_django.models import UserSocialAuth
-from django.urls import reverse_lazy
-import os
-from json.decoder import JSONDecodeError
-import get_feat_playlists_new_albums
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.shortcuts import redirect
 import time
 
+import spotipy
+from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views.generic import ListView
+from django.views.generic.edit import FormView, FormMixin
+
 import ds_pipeline as ds
+import get_feat_playlists_new_albums
+from .forms import PlaylistInputForm
+# Create your views here.
+from .models import Playlist, Song
 
 User = get_user_model()
 
@@ -36,6 +30,12 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
         context = super().get_context_data(**kwargs)
         context['playlists'] = Playlist.objects.all()
         context['form'] = self.get_form()
+        social = self.request.user.social_auth.get(provider='spotify')
+        context['token'] = social.extra_data['access_token']
+        social.extra_data['spotify_me'] = spotipy.Spotify(auth=context['token']).me()
+        context['first_name'] = social.extra_data['spotify_me']['display_name'].split()[0]
+        context['last_name'] = social.extra_data['spotify_me']['display_name'].split()[1]
+        print(social.extra_data['spotify_me'])
         return context
 
     def post(self, request, *args, **kwargs):
@@ -44,28 +44,11 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
             instance = form.save(commit=False)
             instance.playlist_id = instance.playlist_id.split(':')[
                 4]  # filter down to the playlist ID
-            scope = 'user-library-read'
-            client_id = os.environ['SPOTIPY_CLIENT_ID']
-            client_secret = os.environ['SPOTIPY_CLIENT_SECRET']
-            redirect_uri = os.environ['SPOTIPY_REDIRECT_URI']
 
-            rec_id = request.user.id
+            username = request.user.username
 
-            # get spotify username based on admin userID
-            # don't know if this is going to work with someone other than myself
-            try:
-                username = UserSocialAuth.objects.all().filter(
-                    id=rec_id)[0].uid
-            except IndexError:
-                username = 'brennerswenson'
-
-            try:
-                token = util.prompt_for_user_token(username, scope, client_id,
-                                                   client_secret, redirect_uri)
-            except (AttributeError, JSONDecodeError):
-                os.remove(f".cache-{username}")
-                token = util.prompt_for_user_token(username, scope, client_id,
-                                                   client_secret, redirect_uri)
+            social = self.request.user.social_auth.get(provider='spotify')
+            token = social.extra_data['access_token']
 
             sp = spotipy.Spotify(auth=token)
 
@@ -103,40 +86,24 @@ class ChosenPlaylistListView(ListView):
 class RecommendationsView(ListView):
     template_name = 'recommendations.html'
     model = Playlist
-    playlist_id = None
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['chosen_playlist'] = Playlist.objects.get(
             playlist_id=self.kwargs['playlist_id'])
 
-        scope = 'user-library-read'
-        client_id = os.environ['SPOTIPY_CLIENT_ID']
-        client_secret = os.environ['SPOTIPY_CLIENT_SECRET']
-        redirect_uri = os.environ['SPOTIPY_REDIRECT_URI']
+        username = self.request.user.username
 
-        rec_id = self.request.user.id
+        print('=> starting recommendations for {}\n'.format(username))
 
-        print('=> starting recommendations\n')
-
-        try:
-            username = UserSocialAuth.objects.all().filter(id=rec_id)[0].uid
-        except IndexError:
-            username = 'brennerswenson'
-
-        try:
-            token = util.prompt_for_user_token(username, scope, client_id,
-                                               client_secret, redirect_uri)
-        except (AttributeError, JSONDecodeError):
-            os.remove(f".cache-{username}")
-            token = util.prompt_for_user_token(username, scope, client_id,
-                                               client_secret, redirect_uri)
+        social = self.request.user.social_auth.get(provider='spotify')
+        token = social.extra_data['access_token']
 
         recs = ds.main(
             playlist_id=context['chosen_playlist'].playlist_id,
-            username=username)
-        sp = spotipy.Spotify(auth=token)
+            username=username, token=token)
         context['active_user'] = username
+        sp = spotipy.Spotify(auth=token)
 
         if recs.shape[0] > 0:
             print("=> creating Song db objects")
