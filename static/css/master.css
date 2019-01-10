@@ -65,18 +65,41 @@ body {
     right: 0;
 }
 
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.card {
+    background-color: transparent; !important;
+    border: 0; !important;
+}
+
 .rec-list {
     overflow-y: scroll;
 }
 
-.playlist-item {
-    border-radius: 5px;
-    -webkit-box-shadow: 2px 4px 12px -4px rgba(0, 0, 0, 0.56);
-    -moz-box-shadow: 2px 4px 12px -4px rgba(0, 0, 0, 0.56);
-    box-shadow: 2px 4px 12px -4px rgba(0, 0, 0, 0.56);
-    background-color: #313131;
-    border-color: #313131;
+.playlist-thumb-container {
 
+}
+
+.row-flex {
+
+}
+
+.playlist-thumb {
+    margin-bottom: 2vh;
+
+}
+
+.playlist-thumb-container a {
+    display: block;
+    float: left;
+}
+
+.playlist-thumb-container a {
+    justify-content: space-between;
 }
 
 .embedded-playlist {

@@ -16,19 +16,47 @@
                                 <p class="text">Simply click on a playlist to get a recommendation from its tracks that
                                     you'll like the most!</p>
                                 <p class="text">Here is a list of Spotify's featured playlists right now:</p>
+                                {% for pb in playlist_batches %}
 
-                                {% for playlist in object_list %}
-                                    {% if playlist.playlist_featured %}
-                                        <ul>
-                                            <a href="{% url "spotify_app:playlist_detail" playlist.playlist_id %}">
-                                                <button type="button" id="{{ playlist.playlist_id }}"
-                                                        class="btn btn-success playlist-item">
-                                                    {{ playlist.playlist_name }} [{{ playlist.playlist_num_tracks }}
-                                                    songs]
-                                                </button>
-                                            </a>
-                                        </ul>
-                                    {% endif %}
+                                    <div class="container playlist-thumb-container">
+                                        <div class="row justify-content-md-around">
+                                            {% if pb.0.playlist_featured %}
+                                                <div class="col-lg-4">
+                                                    <div class="card playlist-thumb playlist-thumb-left">
+                                                        <a class="card"
+                                                           href="{% url "spotify_app:playlist_detail" pb.0.playlist_id %}">
+                                                            <img class="img-responsive"src="{{ pb.0.playlist_img_src }}">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+
+                                            {% if pb.1.playlist_featured %}
+                                                <div class="col-lg-4">
+                                                    <div class="card playlist-thumb playlist-thumb-right">
+                                                        <a class="card"
+                                                           href="{% url "spotify_app:playlist_detail" pb.1.playlist_id %}">
+                                                            <img class="img-responsive" src="{{ pb.1.playlist_img_src }}">
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+
+                                            {% if pb.2.playlist_featured %}
+                                                <div class="col-lg-4">
+                                                    <div class="card playlist-thumb playlist-thumb-right">
+                                                        <a class="card"
+                                                           href="{% url "spotify_app:playlist_detail" pb.2.playlist_id %}">
+                                                            <img class="img-responsive" src="{{ pb.2.playlist_img_src }}">
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
                                 {% endfor %}
                             </div>
                             <div class="col-md-6">

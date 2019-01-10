@@ -13,6 +13,7 @@ import get_feat_playlists_new_albums
 from .forms import PlaylistInputForm
 # Create your views here.
 from .models import Playlist, Song
+from django.core.paginator import Paginator
 
 User = get_user_model()
 
@@ -22,20 +23,27 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
 
     model = Playlist
     template_name = 'index.html'
-    queryset = Playlist.objects.all().order_by('-date_created')[0:11]
+    queryset = Playlist.objects.all()
     form_class = PlaylistInputForm
     success_url = reverse_lazy('spotify_app:playlist_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['playlists'] = Playlist.objects.all()
+        context['playlists'] = Playlist.objects.all().order_by('-date_created')[0:13]
+        res = []
+        for i, p in enumerate(context['playlists']):
+            if i < len(context['playlists']) - 1:
+                if i % 3 == 0 or i == 0:
+                    res.append((p, context['playlists'][i + 1], context['playlists'][i + 2]))
+
+        context['playlist_batches'] = res
+
         context['form'] = self.get_form()
         social = self.request.user.social_auth.get(provider='spotify')
         context['token'] = social.extra_data['access_token']
         social.extra_data['spotify_me'] = spotipy.Spotify(auth=context['token']).me()
         context['first_name'] = social.extra_data['spotify_me']['display_name'].split()[0]
         context['last_name'] = social.extra_data['spotify_me']['display_name'].split()[1]
-        print(social.extra_data['spotify_me'])
         return context
 
     def post(self, request, *args, **kwargs):

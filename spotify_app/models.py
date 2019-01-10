@@ -14,6 +14,7 @@ class Playlist(models.Model):
     playlist_featured = models.BooleanField(default=False)
     playlist_owner = models.CharField(max_length=500)
     date_created = models.CharField(max_length=500, default='No date')
+    playlist_img_src = models.CharField(max_length=5000, null=True, default='no_img')
 
     def __str__(self):
         return self.playlist_name
@@ -35,4 +36,3 @@ class Song(models.Model):
 
     def __str__(self):
         return self.song_name
-

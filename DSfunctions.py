@@ -71,6 +71,8 @@ def get_user_owned_playlist_contents(username, token, all_results, sp):
 
         df_master = pd.DataFrame(all_results).T
 
+        df_master = df_master.dropna()
+
         return all_results, df_master
 
     else:
@@ -134,6 +136,8 @@ def get_user_saved_songs(username, token, all_results, sp):
         # create dataframe from song data
         df_master = pd.DataFrame(all_results).T
 
+        df_master = df_master.dropna()
+
         return all_results, df_master
 
     else:
@@ -162,13 +166,17 @@ def get_deep_song_info(all_results, df_master, username, token, sp):
         # iterate through song ids in batches of 45
         for id_batch in chunks(45, all_results.keys()):
             # get audio features for batch
-            batch_audio_features = sp.audio_features(id_batch)
+            try:
+                batch_audio_features = sp.audio_features(id_batch)
 
-            # create dictionary of song ids and features
-            temp_dict = dict(zip(id_batch, batch_audio_features))
+                # create dictionary of song ids and features
+                temp_dict = dict(zip(id_batch, batch_audio_features))
 
-            # update main dictionary with results
-            all_audio_features.update(temp_dict)
+                # update main dictionary with results
+                all_audio_features.update(temp_dict)
+            except AttributeError:
+                print('ERROR AT {}'.format(id_batch))
+                continue
 
         # columns to drop
         drop_columns = [
@@ -206,16 +214,20 @@ def get_album_info(df_master, username, token, sp):
 
         # iterate in batches
         for album_id_batch in chunks(20, df_master['album_id']):
+            try:
+                batch_albums = sp.albums(album_id_batch)  # get albums
+                batch_albums = batch_albums['albums']  # only pull out album info
+                # iterate thorugh album ids
+                for i, album_id in enumerate(album_id_batch):
+                    # get only attributes of desire
+                    all_albums[album_id] = {
+                        'record_label': batch_albums[i]['label'],
+                        'album_popularity': batch_albums[i]['popularity']
+                    }
+            except AttributeError:
+                print('ERROR AT {}'.format(album_id_batch))
+                continue
 
-            batch_albums = sp.albums(album_id_batch)  # get albums
-            batch_albums = batch_albums['albums']  # only pull out album info
-            # iterate thorugh album ids
-            for i, album_id in enumerate(album_id_batch):
-                # get only attributes of desire
-                all_albums[album_id] = {
-                    'record_label': batch_albums[i]['label'],
-                    'album_popularity': batch_albums[i]['popularity']
-                }
         # create df of albums data
         albums_df = pd.DataFrame(all_albums).T
 
@@ -248,16 +260,18 @@ def get_artist_info(df_master, username, token, sp):
         # iterate in batches
 
         for artist_id_batch in chunks(20, df_master['artist_id'].unique()):
-
-            batch_artists = sp.artists(artist_id_batch)
-            batch_artists = batch_artists['artists']
-            for i, artist_id in enumerate(artist_id_batch):
-                # get only attributes that are needed
-                all_artists[artist_id] = {
-                    'artist_followers': batch_artists[i]['followers']['total'],
-                    'artist_genres': batch_artists[i]['genres'],
-                    'artist_popularity': batch_artists[i]['popularity']
-                }
+            try:
+                batch_artists = sp.artists(artist_id_batch)
+                batch_artists = batch_artists['artists']
+                for i, artist_id in enumerate(artist_id_batch):
+                    # get only attributes that are needed
+                    all_artists[artist_id] = {
+                        'artist_followers': batch_artists[i]['followers']['total'],
+                        'artist_genres': batch_artists[i]['genres'],
+                        'artist_popularity': batch_artists[i]['popularity']
+                    }
+            except AttributeError:
+                print('ERROR AT {}'.format(artist_id_batch))
 
         # create df of artists data
         artists_df = pd.DataFrame(all_artists).T

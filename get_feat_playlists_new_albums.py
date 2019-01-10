@@ -31,7 +31,8 @@ def main():
                             playlist_num_tracks=playlist['tracks']['total'],
                             playlist_featured=True,
                             playlist_owner=playlist['owner']['display_name'].lower(),
-                            date_created=time.time())
+                            date_created=time.time(),
+                            playlist_img_src=playlist['images'][0]['url'])
         temp_obj.save()
 
 
