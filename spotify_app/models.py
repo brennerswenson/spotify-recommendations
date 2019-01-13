@@ -41,9 +41,16 @@ class Song(models.Model):
         return self.song_name
 
 
-class Profile(models.Model):
+class RecProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     user_kmeans = PickledObjectField(null=True, default='no_object_yet')
+    user_pca_obj = PickledObjectField(null=True, default='no_object_yet')
+    user_df_features_obj = PickledObjectField(null=True, default='no_object_yet')
+    user_top_clusters_obj = PickledObjectField(null=True, default='no_object_yet')
+    user_has_objects = models.BooleanField(default=False, null=True)
+
+    def __str__(self):
+        return self.user.username
 
     def validate_unique(self, exclude=None):
         super().validate_unique(exclude='host')

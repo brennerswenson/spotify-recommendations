@@ -130,7 +130,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIAL_AUTH_SPOTIFY_SCOPE = ['user-read-email', 'user-library-read']
-#SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+# SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 LOGIN_REDIRECT_URL = '/playlists'
 LOGOUT_REDIRECT_URL = '/'
@@ -150,8 +150,7 @@ SOCIAL_AUTH_PIPELINE = (
 SOCIAL_AUTH_DISCONNECT_PIPELINE = (
     # Verifies that the social association can be disconnected from the current
     # user (ensure that the user login mechanism is not compromised by this
-    # disconnection).
-    'social_core.pipeline.disconnect.allowed_to_disconnect',
+    # disconnection)
 
     # Collects the social associations to disconnect.
     'social_core.pipeline.disconnect.get_entries',

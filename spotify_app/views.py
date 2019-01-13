@@ -115,6 +115,11 @@ class RecommendationsView(ListView):
             username=username, token=token)
         context['active_user'] = username
         sp = spotipy.Spotify(auth=token)
+        social = self.request.user.social_auth.get(provider='spotify')
+        context['token'] = social.extra_data['access_token']
+        social.extra_data['spotify_me'] = spotipy.Spotify(auth=context['token']).me()
+        context['first_name'] = social.extra_data['spotify_me']['display_name'].split()[0]
+        context['last_name'] = social.extra_data['spotify_me']['display_name'].split()[1]
 
         if recs.shape[0] > 0:
             print("=> creating Song db objects")
@@ -136,7 +141,7 @@ class RecommendationsView(ListView):
                 tmp_song.date_created = time.time()
                 tmp_song.parent_playlist_id = context[
                     'chosen_playlist'].playlist_id
-                tmp_song.album_cover_art = rec_tracks['tracks'][recs.index.get_loc(i)]['images'][0]['url']
+                tmp_song.album_cover_art = rec_tracks['tracks'][recs.index.get_loc(i)]['album']['images'][1]['url']
                 tmp_song.save()
             context['script_ran'] = True
             context['no_recommendations'] = False

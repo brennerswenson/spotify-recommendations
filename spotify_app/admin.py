@@ -1,16 +1,6 @@
 from django.contrib import admin
-from spotify_app.models import Playlist, Song, Profile
-
-
-# Register your models here.
-
-# class RatingAdmin(admin.ModelAdmin):
-#     readonly_fields = ('date_added',)
-#
-#
-# admin.site.register(Playlist, RatingAdmin)
-# admin.site.register(Song, RatingAdmin)
+from spotify_app.models import Playlist, Song, RecProfile
 
 admin.site.register(Playlist)
 admin.site.register(Song)
-admin.site.register(Profile)
+admin.site.register(RecProfile)

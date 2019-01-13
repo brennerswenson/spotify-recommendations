@@ -52,7 +52,7 @@ body {
 
 .text {
     font-family: 'Raleway', sans-serif;
-    font-size: 1.25rem;
+    font-size: 1.45rem;
 }
 
 .footer {
@@ -71,52 +71,93 @@ img {
     height: auto;
 }
 
-.rec-song-item {
+.rec-row {
+    background-color: transparent !important;
+    border: 0 !important;
+}
+
+.rec-button {
+    background-color: #313131 !important;
+}
+
+.jumbotron {
+    background-color: #F0F0F0 !important;
+}
+
+.text {
+    font-size: 1.3rem;
+}
+
+.button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1vh;
+    background-color: transparent !important;
+    border: 0 !important;
+}
+
+.rec-song-button {
+    justify-content: space-around;
     display: inline-block;
-!important;
-    vertical-align: middle;
-!important;
     float: none;
-!important;
-    justify-content: left;
-!important;
+    vertical-align: middle;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    width: 20vw;
+    font-size: 1.25rem;
+    background-color: #313131;
+    border-color: #313131;
 }
 
 .rec-song-art {
-    display: inline-block;
-!important;
-    vertical-align: middle;
-!important;
-    float: none;
-!important;
-    justify-content: left;
+    justify-content: flex-start;
     -webkit-box-shadow: 0px 2px 10px -2px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: 0px 2px 10px -2px rgba(0, 0, 0, 0.6);
     box-shadow: 0px 2px 10px -2px rgba(0, 0, 0, 0.6);
+    background-color: transparent !important;
 }
 
 .song-thumb-container {
-    background-color: transparent;
-!important;
+    background-color: transparent !important;
 }
-
 
 li {
     list-style-type: none;
 }
 
+input {
+    width: 75%;
+    margin: auto;
+    position: relative;
+}
+
+.custom-playlist-button {
+    margin-top: 2vh;
+    width: 40%;
+    font-size: 1.4rem;
+    background-color: #313131;
+    border-color: #313131;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .card {
-    background-color: transparent;
-!important;
-    border: 0;
-!important;
+    background-color: transparent !important;
+    border: 0 !important;
 }
 
 .rec-list {
     overflow-y: scroll;
+    margin-left: -10vh;
+    background-color: transparent !important;
+    border: 0 !important;
+}
+
+.recommendations-for-blank {
+    margin-bottom: 2vh;
 }
 
 .playlist-thumb-container {
@@ -149,6 +190,7 @@ li {
     -webkit-box-shadow: 2px 4px 12px 3px rgba(0, 0, 0, 0.56);
     -moz-box-shadow: 2px 4px 12px 3px rgba(0, 0, 0, 0.56);
     box-shadow: 2px 4px 12px 3px rgba(0, 0, 0, 0.56);
+    margin-top: 2vh;
 }
 
 .recommendation-text {
@@ -156,14 +198,25 @@ li {
     margin-top: 2vh;
     font-size: 1.2rem;
     font-family: 'Raleway', sans-serif;
+    margin-bottom: 3vh;
 }
 
 .recommendations-title {
     margin-top: -2vh;
-    margin-bottom: 2vh;
     font-family: 'Raleway', sans-serif;
     font-weight: normal;
+    font-size: 3.0rem;
 
+}
+
+.recommendations-greeting {
+    font-size: 6.0rem;
+}
+
+.rec-main-col {
+    max-height: 90vh;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .no-rec-header {
