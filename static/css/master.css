@@ -71,9 +71,48 @@ img {
     height: auto;
 }
 
+.rec-song-item {
+    display: inline-block;
+!important;
+    vertical-align: middle;
+!important;
+    float: none;
+!important;
+    justify-content: left;
+!important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rec-song-art {
+    display: inline-block;
+!important;
+    vertical-align: middle;
+!important;
+    float: none;
+!important;
+    justify-content: left;
+    -webkit-box-shadow: 0px 2px 10px -2px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0px 2px 10px -2px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 2px 10px -2px rgba(0, 0, 0, 0.6);
+}
+
+.song-thumb-container {
+    background-color: transparent;
+!important;
+}
+
+
+li {
+    list-style-type: none;
+}
+
 .card {
-    background-color: transparent; !important;
-    border: 0; !important;
+    background-color: transparent;
+!important;
+    border: 0;
+!important;
 }
 
 .rec-list {
@@ -90,6 +129,9 @@ img {
 
 .playlist-thumb {
     margin-bottom: 2vh;
+    -webkit-box-shadow: 0px 2px 10px -2px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0px 2px 10px -2px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 2px 10px -2px rgba(0, 0, 0, 0.6);
 
 }
 

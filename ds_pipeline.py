@@ -1,13 +1,12 @@
 import os
 import sys
-from json.decoder import JSONDecodeError
 
 import spotipy.oauth2
-import spotipy.util as util
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from django.contrib.auth.models import User
+from spotify_app.models import Profile
 
 from DSfunctions import *
 

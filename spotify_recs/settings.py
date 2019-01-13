@@ -146,3 +146,19 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 )
+
+SOCIAL_AUTH_DISCONNECT_PIPELINE = (
+    # Verifies that the social association can be disconnected from the current
+    # user (ensure that the user login mechanism is not compromised by this
+    # disconnection).
+    'social_core.pipeline.disconnect.allowed_to_disconnect',
+
+    # Collects the social associations to disconnect.
+    'social_core.pipeline.disconnect.get_entries',
+
+    # Revoke any access_token when possible.
+    'social_core.pipeline.disconnect.revoke_tokens',
+
+    # Removes the social associations.
+    'social_core.pipeline.disconnect.disconnect',
+)

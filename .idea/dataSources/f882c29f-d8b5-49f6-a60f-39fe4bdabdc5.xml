@@ -767,94 +767,98 @@ uid</ColNames>
       <DataType>varchar(120)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="170" parent="22" name="sqlite_autoindex_spotify_app_song_1">
+    <column id="170" parent="22" name="album_cover_art">
+      <Position>10</Position>
+      <DataType>varchar(5000)|0s</DataType>
+    </column>
+    <index id="171" parent="22" name="sqlite_autoindex_spotify_app_song_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>song_id</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <index id="171" parent="22" name="spotify_app_song_parent_playlist_id_1110aed1">
+    <index id="172" parent="22" name="spotify_app_song_parent_playlist_id_1110aed1">
       <ColNames>parent_playlist_id</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
-    <key id="172" parent="22">
+    <key id="173" parent="22">
       <ColNames>song_id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_spotify_app_song_1</UnderlyingIndexName>
     </key>
-    <foreign-key id="173" parent="22">
+    <foreign-key id="174" parent="22">
       <ColNames>parent_playlist_id</ColNames>
       <RefTableName>spotify_app_playlist</RefTableName>
       <RefColNames>playlist_id</RefColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
     </foreign-key>
-    <column id="174" parent="23" name="id">
+    <column id="175" parent="23" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="175" parent="23" name="session_id">
+    <column id="176" parent="23" name="session_id">
       <Position>2</Position>
       <DataType>varchar(40)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="176" parent="23" name="user_id">
+    <column id="177" parent="23" name="user_id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="177" parent="23" name="spotify_app_usersession_session_id_203869e1">
+    <index id="178" parent="23" name="spotify_app_usersession_session_id_203869e1">
       <ColNames>session_id</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
-    <index id="178" parent="23" name="spotify_app_usersession_user_id_ca79a358">
+    <index id="179" parent="23" name="spotify_app_usersession_user_id_ca79a358">
       <ColNames>user_id</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
-    <key id="179" parent="23">
+    <key id="180" parent="23">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="180" parent="23">
+    <foreign-key id="181" parent="23">
       <ColNames>session_id</ColNames>
       <RefTableName>django_session</RefTableName>
       <RefColNames>session_key</RefColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
     </foreign-key>
-    <foreign-key id="181" parent="23">
+    <foreign-key id="182" parent="23">
       <ColNames>user_id</ColNames>
       <RefTableName>auth_user</RefTableName>
       <RefColNames>id</RefColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
     </foreign-key>
-    <column id="182" parent="24" name="type">
+    <column id="183" parent="24" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="183" parent="24" name="name">
+    <column id="184" parent="24" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="184" parent="24" name="tbl_name">
+    <column id="185" parent="24" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="185" parent="24" name="rootpage">
+    <column id="186" parent="24" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="186" parent="24" name="sql">
+    <column id="187" parent="24" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="187" parent="25" name="name">
+    <column id="188" parent="25" name="name">
       <Position>1</Position>
     </column>
-    <column id="188" parent="25" name="seq">
+    <column id="189" parent="25" name="seq">
       <Position>2</Position>
     </column>
   </database-model>

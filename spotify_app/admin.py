@@ -1,5 +1,5 @@
 from django.contrib import admin
-from spotify_app.models import Playlist, Song
+from spotify_app.models import Playlist, Song, Profile
 
 
 # Register your models here.
@@ -13,3 +13,4 @@ from spotify_app.models import Playlist, Song
 
 admin.site.register(Playlist)
 admin.site.register(Song)
+admin.site.register(Profile)

@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
+from picklefield.fields import PickledObjectField
 
 
 class Playlist(models.Model):
@@ -33,6 +35,15 @@ class Song(models.Model):
     recommended_user = models.CharField(blank=False, max_length=500)
     date_created = models.CharField(max_length=500, default='No date')
     parent_playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE, db_column='parent_playlist_id')
+    album_cover_art = models.CharField(max_length=5000, null=True, default='no_img')
 
     def __str__(self):
         return self.song_name
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user_kmeans = PickledObjectField(null=True, default='no_object_yet')
+
+    def validate_unique(self, exclude=None):
+        super().validate_unique(exclude='host')
