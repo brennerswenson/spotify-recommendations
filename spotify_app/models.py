@@ -43,9 +43,9 @@ class Song(models.Model):
 
 class RecProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    user_kmeans = PickledObjectField(null=True, default='no_object_yet')
-    user_pca_obj = PickledObjectField(null=True, default='no_object_yet')
+    user_hdbscan = PickledObjectField(null=True, default='no_object_yet')
     user_df_features_obj = PickledObjectField(null=True, default='no_object_yet')
+    user_df_scaled_obj = PickledObjectField(null=True, default='no_object_yet')
     user_top_clusters_obj = PickledObjectField(null=True, default='no_object_yet')
     user_has_objects = models.BooleanField(default=False, null=True)
 
