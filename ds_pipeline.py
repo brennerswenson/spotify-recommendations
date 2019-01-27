@@ -112,7 +112,7 @@ def main(playlist_id, username, token):
         X_train_scaled = pd.DataFrame(X_train_scaled, columns=X_train.columns, index=X_train.index)
 
         min_cluster_size = X_train_scaled.shape[0] // (
-                X_train_scaled.shape[1] // 5)  # dynamic cluster sizes depending on the data provided
+                X_train_scaled.shape[1] // 4)  # dynamic cluster sizes depending on the data provided
 
         if min_cluster_size < 10:
             min_cluster_size = 10  # for edge cases when not much data provided
@@ -122,6 +122,7 @@ def main(playlist_id, username, token):
         print("=> fitting HDBSCAN object\n")
         hdbs = HDBSCAN(min_cluster_size=min_cluster_size, prediction_data=True, core_dist_n_jobs=3).fit(
             X_train_scaled)  # create hdbscan classifier fit on the PCA_df
+        print("=> HDBSCAN minimum cluster size is {}\n".format(min_cluster_size))
 
         prof_obj.user_hdbscan = hdbs
         prof_obj.user_df_features_obj = df_features
