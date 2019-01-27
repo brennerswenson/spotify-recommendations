@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cc86f7a2-d5b9-45a3-8ebd-08d79144c410" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ds_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/ds_pipeline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spotify_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spotify_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify_app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/recommendations.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/recommendations.html" afterDir="false" />
-    </list>
+    <list default="true" id="cc86f7a2-d5b9-45a3-8ebd-08d79144c410" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,8 +72,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spotify_app/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1156">
-              <caret line="161" column="114" selection-start-line="161" selection-start-column="114" selection-end-line="161" selection-end-column="114" />
+            <state relative-caret-position="46">
+              <caret line="124" column="29" selection-start-line="124" selection-start-column="29" selection-end-line="124" selection-end-column="29" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -405,16 +397,15 @@
       <workItem from="1546198460647" duration="15153000" />
       <workItem from="1546357630996" duration="31908000" />
       <workItem from="1547393372206" duration="28433000" />
-      <workItem from="1547437685926" duration="20238000" />
+      <workItem from="1547437685926" duration="21129000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="194876000" />
+    <option name="totallyTimeSpent" value="195767000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3741" y="-574" width="1914" height="2061" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1292735" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -747,8 +738,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spotify_app/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="161" column="114" selection-start-line="161" selection-start-column="114" selection-end-line="161" selection-end-column="114" />
+        <state relative-caret-position="46">
+          <caret line="124" column="29" selection-start-line="124" selection-start-column="29" selection-end-line="124" selection-end-column="29" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
