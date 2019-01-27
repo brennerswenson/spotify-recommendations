@@ -7,20 +7,21 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from django.contrib.auth.models import User
 from spotify_app.models import RecProfile
+from hdbscan import HDBSCAN
+import hdbscan
 
 from DSfunctions import *
 
 
-def get_recommendations(username, playlist_id, sp, token, df_features, top_clusters, pca_obj, km):
+def get_recommendations(username, playlist_id, sp, token, df_features, hdbs):
     """
     :param username: spotify username
     :param playlist_id: selected playlist id
     :param sp: connected spotipy object to get api data
     :param token: token used to verify user info with spotify
     :param df_features: df of features for comparison with recs
-    :param top_clusters: clusters to see if recs fit
-    :param pca_obj: saved pca obj from training
-    :param km: saved kmeans object saved from training
+    :param scaled_df: df_features but scaled
+    :param hdbs: saved hsbscan object saved from training
     :return: recs - df of recommendations
     """
     print("=> getting playlist tracks for selected playlist \n")
@@ -52,18 +53,15 @@ def get_recommendations(username, playlist_id, sp, token, df_features, top_clust
         columns=df_playlist_features.columns,
         index=df_playlist_features.index)  # create df from scaled test data
 
-    playlist_pca_obj = pca_obj.transform(playlist_scaled)  # create pca object from playlist data using training data
+    playlist_labels = hdbscan.approximate_predict(hdbs, playlist_scaled)  # classify on playlist songs
 
-    playlist_labels = km.predict(playlist_pca_obj)  # classify on playlist songs
+    df_playlist_features['CENTROID'] = playlist_labels[0]  # add centroid to original features df
+    df_playlist_features['PROBABILITY'] = playlist_labels[1]  # add cluster probabilities
 
-    playlist_pca_df = pd.DataFrame(playlist_pca_obj)  # convert predictions into a df
+    res = df_playlist_features[(~df_playlist_features.index.isin(df_features.index)) & (
+            df_playlist_features['CENTROID'] != -1)]  # SONGS THAT MATCH THE CLASSIFIER
 
-    playlist_pca_df['CENTROID'] = playlist_labels  # assign centroid number to pca df
-
-    df_playlist_features['CENTROID'] = playlist_labels  # add centroid to original features df
-
-    res = df_playlist_features[(df_playlist_features['CENTROID'].isin(top_clusters)) & (
-        ~df_playlist_features.index.isin(df_features.index))]  # SONGS THAT MATCH THE CLASSIFIER
+    res = res.sort_values(by=['PROBABILITY', 'popularity'], ascending=False)  # sort results by probability, then by pop
 
     return res
 
@@ -113,45 +111,32 @@ def main(playlist_id, username, token):
         # create a dataframe from the scaled data
         X_train_scaled = pd.DataFrame(X_train_scaled, columns=X_train.columns, index=X_train.index)
 
-        print("=> fitting PCA Object\n")
-        pca_obj = PCA(n_components=50).fit(X_train_scaled)  # create trained PCA object
+        min_cluster_size = X_train_scaled.shape[0] // (
+                X_train_scaled.shape[1] // 5)  # dynamic cluster sizes depending on the data provided
 
-        print("=> fitting data to PCA Object\n")
-        PCA_df = pd.DataFrame(pca_obj.fit_transform(X_train_scaled))  # create df of scaled PCA data
+        if min_cluster_size < 10:
+            min_cluster_size = 10  # for edge cases when not much data provided
+        else:
+            pass
 
-        print("=> fitting KMeans object\n")
-        km = KMeans(n_clusters=500).fit(PCA_df)  # create KMeans classifier fit on the PCA_df
+        print("=> fitting HDBSCAN object\n")
+        hdbs = HDBSCAN(min_cluster_size=min_cluster_size, prediction_data=True, core_dist_n_jobs=3).fit(
+            X_train_scaled)  # create hdbscan classifier fit on the PCA_df
 
-        # training dataset
-
-        train_labels = km.labels_  # classifications from the training data
-
-        PCA_df['CENTROID'] = train_labels  # add new column to the test df with the centroid the KMeans predicted
-
-        train_centr_freq = label_comparison(train_labels)
-
-        train_freq_df = pd.DataFrame(train_centr_freq)  # create df of the frequency data
-
-        top_clusters = train_freq_df.sort_values(
-            2, ascending=False)[1].values  # top ten clusters
-
-        prof_obj.user_pca_obj = pca_obj
-        prof_obj.user_kmeans = km
+        prof_obj.user_hdbscan = hdbs
         prof_obj.user_df_features_obj = df_features
-        prof_obj.user_top_clusters_obj = top_clusters
+        prof_obj.user_df_scaled_obj = X_train_scaled
         prof_obj.user_has_objects = True
         prof_obj.save()
 
         recs = get_recommendations(username, playlist_id=playlist_id, sp=sp, token=token, df_features=df_features,
-                                   top_clusters=top_clusters, pca_obj=pca_obj, km=km)
+                                   hdbs=hdbs)
 
 
     else:
         print("=> USING STORED DATA TO MAKE RECOMMENDATIONS\n")
         recs = get_recommendations(username, playlist_id=playlist_id, sp=sp, token=token,
-                                   df_features=prof_obj.user_df_features_obj,
-                                   top_clusters=prof_obj.user_top_clusters_obj,
-                                   pca_obj=prof_obj.user_pca_obj, km=prof_obj.user_kmeans)
+                                   df_features=prof_obj.user_df_features_obj, hdbs=prof_obj.user_hdbscan)
 
     return recs
 

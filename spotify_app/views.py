@@ -13,6 +13,7 @@ import get_feat_playlists_new_albums
 from .forms import PlaylistInputForm
 # Create your views here.
 from .models import Playlist, Song
+from funcy import chunks
 from django.core.paginator import Paginator
 
 User = get_user_model()
@@ -112,7 +113,7 @@ class RecommendationsView(ListView):
 
         recs = ds.main(
             playlist_id=context['chosen_playlist'].playlist_id,
-            username=username, token=token)
+            username=username, token=token)[:20]  # only first 20 recs
         context['active_user'] = username
         sp = spotipy.Spotify(auth=token)
         social = self.request.user.social_auth.get(provider='spotify')
@@ -124,10 +125,11 @@ class RecommendationsView(ListView):
         if recs.shape[0] > 0:
             print("=> creating Song db objects")
             print("=> recommendations df shape {}".format(recs.shape))
+
             rec_tracks = sp.tracks(recs.index.values)
 
+            print(len(rec_tracks['tracks']))
             for i, rec in recs.iterrows():
-                print('=> current index is {}'.format(i))
                 tmp_song = Song()
                 tmp_song.song_id = i
                 tmp_song.song_name = rec_tracks['tracks'][recs.index.get_loc(
@@ -143,6 +145,7 @@ class RecommendationsView(ListView):
                     'chosen_playlist'].playlist_id
                 tmp_song.album_cover_art = rec_tracks['tracks'][recs.index.get_loc(i)]['album']['images'][1]['url']
                 tmp_song.save()
+
             context['script_ran'] = True
             context['no_recommendations'] = False
         else:
@@ -151,7 +154,11 @@ class RecommendationsView(ListView):
             print('=> no recommendations!')
 
         print(recs)
-
-        context['recs'] = Song.objects.all().filter(recommended_user=username)
+        if len(recs) > 5:
+            context['recs'] = Song.objects.all().filter(recommended_user=username,
+                                                        parent_playlist_id=context['chosen_playlist'].playlist_id)[:5]
+        else:
+            context['recs'] = Song.objects.all().filter(recommended_user=username,
+                                                        parent_playlist_id=context['chosen_playlist'].playlist_id)
 
         return context
