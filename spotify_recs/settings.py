@@ -121,8 +121,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-SOCIAL_AUTH_SPOTIFY_KEY = os.environ['SPOTIPY_CLIENT_ID']
-SOCIAL_AUTH_SPOTIFY_SECRET = os.environ['SPOTIPY_CLIENT_SECRET']
+SOCIAL_AUTH_SPOTIFY_KEY = '5fe40e82ba784e6e8c10e465af890764'  # was this:  os.environ['SPOTIPY_CLIENT_ID']
+SOCIAL_AUTH_SPOTIFY_SECRET = '40fa3b85075c45e88877adf8d562fb38'  # was this: os.environ['SPOTIPY_CLIENT_SECRET']
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
