@@ -4,7 +4,7 @@ import sys
 import spotipy.oauth2
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 from django.contrib.auth.models import User
 from spotify_app.models import RecProfile
 from hdbscan import HDBSCAN
@@ -13,14 +13,13 @@ import hdbscan
 from DSfunctions import *
 
 
-def get_recommendations(username, playlist_id, sp, token, df_features, hdbs):
+def get_recommendations(username, playlist_id, sp, token, df_features, hdbs, pca_obj):
     """
     :param username: spotify username
     :param playlist_id: selected playlist id
     :param sp: connected spotipy object to get api data
     :param token: token used to verify user info with spotify
     :param df_features: df of features for comparison with recs
-    :param scaled_df: df_features but scaled
     :param hdbs: saved hsbscan object saved from training
     :return: recs - df of recommendations
     """
@@ -47,13 +46,17 @@ def get_recommendations(username, playlist_id, sp, token, df_features, hdbs):
                                                df_playlist_features)  # make df playlist columns match training data
 
     # create a dataframe from the scaled data
-    playlist_scaled = StandardScaler().fit_transform(df_playlist_features)
+    playlist_scaled = MinMaxScaler().fit_transform(df_playlist_features)
     playlist_scaled = pd.DataFrame(
         playlist_scaled,
         columns=df_playlist_features.columns,
         index=df_playlist_features.index)  # create df from scaled test data
 
-    playlist_labels = hdbscan.approximate_predict(hdbs, playlist_scaled)  # classify on playlist songs
+    playlist_pca_obj = pca_obj.transform(playlist_scaled)
+
+    playlist_pca_df = pd.DataFrame(playlist_pca_obj)
+
+    playlist_labels = hdbscan.approximate_predict(hdbs, playlist_pca_df)  # classify on playlist songs
 
     df_playlist_features['CENTROID'] = playlist_labels[0]  # add centroid to original features df
     df_playlist_features['PROBABILITY'] = playlist_labels[1]  # add cluster probabilities
@@ -106,38 +109,54 @@ def main(playlist_id, username, token):
         X_train = df_features
 
         # need to regularise data, scale and normalise. not sure the best way to do it
-        X_train_scaled = StandardScaler().fit_transform(X_train)
+        X_train_scaled = MinMaxScaler().fit_transform(X_train)
 
         # create a dataframe from the scaled data
         X_train_scaled = pd.DataFrame(X_train_scaled, columns=X_train.columns, index=X_train.index)
 
-        min_cluster_size = X_train_scaled.shape[0] // (
-                X_train_scaled.shape[1] // 4)  # dynamic cluster sizes depending on the data provided
+        print('=> df shape is {}\n'.format(X_train_scaled.shape))
 
-        if min_cluster_size < 10:
-            min_cluster_size = 10  # for edge cases when not much data provided
+        print('=> fitting PCA obj\n')
+        pca_obj = PCA(n_components=0.70).fit(X_train_scaled)
+
+        if pca_obj.n_components_ > 30:
+            pca_obj = PCA(n_components=25).fit(X_train_scaled)
+            print('=> too many components! re-fitting pca object\n')
         else:
             pass
 
+        print('=> PCA obj has {} components\n'.format(pca_obj.n_components_))
+
+        print("=> variance explained by {}'s pca components {}\n".format(username,
+                                                                         sum(pca_obj.explained_variance_ratio_)))
+
+        print("=> fitting data to PCA Object\n")
+        PCA_df = pd.DataFrame(pca_obj.fit_transform(X_train_scaled))  # create df of scaled PCA data
+
+        print(X_train_scaled.head())
+
         print("=> fitting HDBSCAN object\n")
-        hdbs = HDBSCAN(min_cluster_size=min_cluster_size, prediction_data=True, core_dist_n_jobs=3).fit(
-            X_train_scaled)  # create hdbscan classifier fit on the PCA_df
-        print("=> HDBSCAN minimum cluster size is {}\n".format(min_cluster_size))
+        hdbs = HDBSCAN(prediction_data=True,
+                       core_dist_n_jobs=3,
+                       min_cluster_size=2).fit(PCA_df)  # create hdbscan classifier fit on the PCA_df
 
         prof_obj.user_hdbscan = hdbs
+        prof_obj.user_pca_obj = pca_obj
         prof_obj.user_df_features_obj = df_features
         prof_obj.user_df_scaled_obj = X_train_scaled
+        prof_obj.user_has_objects = True
         prof_obj.user_has_objects = True
         prof_obj.save()
 
         recs = get_recommendations(username, playlist_id=playlist_id, sp=sp, token=token, df_features=df_features,
-                                   hdbs=hdbs)
+                                   hdbs=hdbs, pca_obj=pca_obj)
 
 
     else:
         print("=> USING STORED DATA TO MAKE RECOMMENDATIONS\n")
         recs = get_recommendations(username, playlist_id=playlist_id, sp=sp, token=token,
-                                   df_features=prof_obj.user_df_features_obj, hdbs=prof_obj.user_hdbscan)
+                                   df_features=prof_obj.user_df_features_obj, hdbs=prof_obj.user_hdbscan,
+                                   pca_obj=prof_obj.user_pca_obj)
 
     return recs
 
