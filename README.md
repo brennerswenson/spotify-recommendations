@@ -1,5 +1,7 @@
 # Spotify Song Recommendations
 
+## Definition
+
 An app that allows a user to receive recommendations from a playlist of their choosing.
 
 ## Installation
@@ -29,6 +31,14 @@ Use the following steps to use the app:
 ## Demo (click the thumbnail to be redirected)
 
 [![Watch the video](https://i.imgur.com/zQpMsDZ.jpg)](https://www.youtube.com/watch?v=pUMX5-VyBaw&t=)
+
+## Analysis
+
+Please refer to the Jupyter notebook for required analysis
+
+## Conclusion
+
+Please refer to Jupyter notebook for required conclusion
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
