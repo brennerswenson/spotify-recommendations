@@ -1,10 +1,10 @@
-numpy==1.16.0
-pandas==0.23.4
 hdbscan==0.8.18
-seaborn==0.9.0
 spotipy==2.4.4
-Django==2.1.4
+Django==2.1.5
 funcy==1.11
 matplotlib==3.0.2
+numpy==1.16.0
+seaborn==0.9.0
+pandas==0.23.4
 django-picklefield==2.0
 scikit_learn==0.20.2
