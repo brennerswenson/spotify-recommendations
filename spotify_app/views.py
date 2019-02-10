@@ -49,8 +49,6 @@ User = get_user_model()
 
 
 class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
-    get_feat_playlists_new_albums.main()  # get featured playlists on launch
-
     model = Playlist
     template_name = 'index.html'
     queryset = Playlist.objects.all()
@@ -58,6 +56,7 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
     success_url = reverse_lazy('spotify_app:playlist_list')
 
     def get_context_data(self, **kwargs):
+        get_feat_playlists_new_albums.main()  # get featured playlists on launch
         context = super().get_context_data(**kwargs)
         context['playlists'] = Playlist.objects.all().order_by('-date_created')[0:10]
         res = []
