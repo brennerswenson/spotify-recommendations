@@ -110,7 +110,6 @@ class PlaylistListFormView(LoginRequiredMixin, ListView, FormView, FormMixin):
             return self.form_invalid(form)
 
 
-# FINISH THIS LATER! FIGURE OUT HOW TO STORE RECOMMENDED SONGS IN DB AND LIST THEM OUT
 class ChosenPlaylistListView(ListView):
     template_name = 'recommendations.html'
     model = Playlist
