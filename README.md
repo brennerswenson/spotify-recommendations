@@ -20,7 +20,7 @@ python manage.py migrate  # creates and loads database schema
 python manage.py runserver  # runs application
 ```
 
-Your terminal with then generate a url to paste into your browser where the app is ran.
+Your terminal will then generate a url to paste into your browser where the app is ran.
 
 Use the following steps to use the app:
 1. Click "Login with Spotify", and enter your Spotify credentials
