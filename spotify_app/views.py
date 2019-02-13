@@ -30,7 +30,6 @@ def show_diverse_recs(res, threshold):
             cluster_rec = res[res['CENTROID'] == clust]
             if len(rec_ids) < threshold:
                 for i in cluster_rec.index:
-
                     if i in rec_ids:
                         continue
                     else:
@@ -42,7 +41,8 @@ def show_diverse_recs(res, threshold):
                             continue
             else:
                 break
-    return res[res.index.isin(rec_ids)]            # return subset of df with re-arranged items
+    # return subset of df with re-arranged items
+    return res.loc[rec_ids]
 
 
 User = get_user_model()
@@ -138,12 +138,11 @@ class RecommendationsView(ListView):
         social = self.request.user.social_auth.get(provider='spotify')
         token = social.extra_data['access_token']
 
-
         recs = ds.main(
             playlist_id=context['chosen_playlist'].playlist_id,
             username=username, token=token)
 
-        if recs['CENTROID'].nunique() > 1 and recs.shape[0] > 5:  # order recommendations alternating clusters
+        if recs.shape[0] > 5:  # order recommendations alternating clusters
             recs = show_diverse_recs(recs, 5)
         else:
             pass
