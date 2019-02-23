@@ -315,20 +315,25 @@ def get_playlist_tracks(username, playlist_id, sp):
 
     for i in range(len(tracks_total)):
         # get features/attributes of worth
-        song_id = tracks_total[i]['track']['id']
 
-        playlist_results[song_id] = {
-            'song_name': tracks_total[i]['track']['name'],
-            'duration_ms': tracks_total[i]['track']['duration_ms'],
-            'artist_name': tracks_total[i]['track']['artists'][0]['name'],
-            'artist_id': tracks_total[i]['track']['artists'][0]['id'],
-            'album_id': tracks_total[i]['track']['album']['id'],
-            'album_name': tracks_total[i]['track']['album']['name'],
-            'release_date': tracks_total[i]['track']['album']['release_date'],
-            'popularity': tracks_total[i]['track']['popularity'],
-            'explicit': tracks_total[i]['track']['explicit']
-        }
-        playlist_df = pd.DataFrame(playlist_results).T
+        try:
+
+            song_id = tracks_total[i]['track']['id']
+
+            playlist_results[song_id] = {
+                'song_name': tracks_total[i]['track']['name'],
+                'duration_ms': tracks_total[i]['track']['duration_ms'],
+                'artist_name': tracks_total[i]['track']['artists'][0]['name'],
+                'artist_id': tracks_total[i]['track']['artists'][0]['id'],
+                'album_id': tracks_total[i]['track']['album']['id'],
+                'album_name': tracks_total[i]['track']['album']['name'],
+                'release_date': tracks_total[i]['track']['album']['release_date'],
+                'popularity': tracks_total[i]['track']['popularity'],
+                'explicit': tracks_total[i]['track']['explicit']
+            }
+        except TypeError:
+            print('=> error at {}'.format(i))
+    playlist_df = pd.DataFrame(playlist_results).T
     return playlist_results, playlist_df
 
 
