@@ -11,7 +11,8 @@ import time
 
 
 def main():
-    client_credentials_manager = SpotifyClientCredentials()
+    client_credentials_manager = SpotifyClientCredentials(client_id='5fe40e82ba784e6e8c10e465af890764',
+                                                          client_secret='40fa3b85075c45e88877adf8d562fb38')
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
     print('Getting featured playlists...')
