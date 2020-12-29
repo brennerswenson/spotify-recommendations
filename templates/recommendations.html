@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+{% load static %}
 
 
 {% block content %}
@@ -15,7 +15,7 @@
                             <div class="col-md-6">
 
                                 <iframe class="embedded-playlist"
-                                        src="https://open.spotify.com/embed/user/{{ chosen_playlist.playlist_owner }}/playlist/{{ chosen_playlist.playlist_id }}"
+                                        src="https://open.spotify.com/embed/playlist/{{ chosen_playlist.playlist_id }}"
                                         width="500" height="1000"
                                         frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                             </div>

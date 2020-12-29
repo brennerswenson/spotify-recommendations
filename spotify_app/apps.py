@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class SpotifyAppConfig(AppConfig):
-    name = 'spotify_app'
+    name = "spotify_app"

@@ -18,9 +18,9 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.HomePage.as_view(), name='home'),
-    path('', include('spotify_app.urls', namespace='spotify_app')),
-    path('social/', include('social_django.urls')),
-    path('', include('django.contrib.auth.urls')),
+    path("admin/", admin.site.urls),
+    path("", views.HomePage.as_view(), name="home"),
+    path("", include("spotify_app.urls", namespace="spotify_app")),
+    path("social/", include("social_django.urls")),
+    path("", include("django.contrib.auth.urls")),
 ]
