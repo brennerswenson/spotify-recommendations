@@ -6,7 +6,7 @@ An app that allows a user to receive recommendations from a playlist of their ch
 
 ## Installation
 
-I am using Python 3.6.7 with this project. Use the package manager [pip](https://pip.pypa.io/en/stable/) to install all dependencies. I would recommend using a virtual environment before installing dependencies. Navigate to the main directory (where `manage.py` is) and run the below command:
+I am using Python 3.9.1 with this project. Use the package manager [pip](https://pip.pypa.io/en/stable/) to install all dependencies. I would recommend using a virtual environment before installing dependencies. Navigate to the main directory (where `manage.py` is) and run the below command:
 ```bash
 pip install -r requirements.txt
 ```
