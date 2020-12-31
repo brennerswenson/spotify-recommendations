@@ -7,7 +7,7 @@
 
     {% if user.is_authenticated %}
         <div class="jumbotron text-center w-100 ">
-            <h1 class="display-4 recommendations-title">Spotify Song Recommender BUTTHOLE</h1>
+            <h1 class="display-4 recommendations-title">Spotify Song Recommender</h1>
         </div>
         <div class="container-fluid">
             <div class="row">
@@ -45,9 +45,9 @@
                             <div class="fa fa-check done"></div>
                             <div class="fa fa-close failed"></div>
                             <div class=" text-center my-5">
-                                <a class="btn btn-primary" href="
+                                <a class="btn btn-lg btn-primary rec-button" href="
                                         {% url "spotify_app:recommendations" chosen_playlist.playlist_id %}">
-                                    BUTTS</a>
+                                    Get Recommendations</a>
                             </div>
                         </div>
                         <div class="">
@@ -55,24 +55,22 @@
 
                         </div>
                     {% elif script_ran %}
-                        <div class="recommendation-text">
-                            <p class="text">All done! Below are your recommendations from
+                        <div class=" d-flex flex-column justify-content-center ml-3 ml-md-5"">
+                            <p class="text recommendation-text">All done! Below are your recommendations from
                                 the playlist on
                                 the
                                 left. Click on any of the buttons
                                 to be redirected to Spotify's website to listen to the
                                 song!</p>
-                        </div>
-                        <div class="recommendations-for-blank"><h2>Song recommendations
-                            for {{ first_name }}:</h2></div>
+                        <h2>Song recommendations
+                            for {{ first_name }}:</h2>
                         {% for rec in recs %}
                             {% if rec.recommended_user == active_user and rec.parent_playlist_id == chosen_playlist.playlist_id %}
                                 <ul class="rec-list">
                                     <li>
-                                        <div class="container song-thumb-container">
-                                            <div class="row rec-row">
+                                        <div class="d-flex justify-content-center  song-thumb-container">
 
-                                                <div class="col-sm-4">
+                                                <div class="d-inline-block">
                                                     <div class="card rec-song-art">
                                                         <a href="https://open.spotify.com/track/{{ rec.song_id }}"
                                                            target="_blank">
@@ -81,11 +79,11 @@
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-8 button-div">
+                                                <div class="align-self-center button-div d-inline-block  pl-3">
                                                     <a target="_blank"
                                                        href="https://open.spotify.com/track/{{ rec.song_id }}">
                                                         <button type="button"
-                                                                class="btn btn-success rec-song-button align-middle">
+                                                                class="btn btn-success rec-song-button ">
                                                             {{ rec.song_name }}
                                                             -
                                                             {{ rec.artist_name }}
@@ -96,6 +94,10 @@
                                 </ul>
                             {% endif %}
                         {% endfor %}
+                        </div>
+
+                        <div class="recommendations-for-blank"></div>
+
                     {% endif %}
                     {% if no_recommendations %}
                         <div class="row">

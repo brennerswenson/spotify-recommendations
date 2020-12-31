@@ -44,6 +44,9 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+
 }
 
 .myContent {
@@ -59,8 +62,8 @@ body {
 
 .footer {
     box-shadow: -1px -5px 11px -5px rgba(0, 0, 0, 0.76);
-    position: absolute;
-    bottom: 0;
+    /*position: absolute;*/
+    /*bottom: 0;*/
     width: 100%;
     background-color: #313131;
     left: 0;
@@ -196,11 +199,11 @@ input {
 }
 
 .recommendation-text {
-    margin-left: -10vw;
-    margin-top: 2vh;
+    /*margin-left: -10vw;*/
+    /*margin-top: 2vh;*/
     font-size: 1.2rem;
     font-family: 'Raleway', sans-serif;
-    margin-bottom: 3vh;
+    /*margin-bottom: 3vh;*/
 }
 
 .recommendations-title {
@@ -304,10 +307,14 @@ input {
     }
 
 }
-@media (min-width: 1000px) {
-        #playlistEmbedded {
-    width: 500px !important;
-}
-    }
 
+
+.pageBody {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.btn-primary {
+
+}
 
