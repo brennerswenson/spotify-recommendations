@@ -134,8 +134,6 @@ class RecommendationsView(ListView):
 
         if recs.shape[0] > 5:  # order recommendations alternating clusters
             recs = show_diverse_recs(recs, 5)
-        else:
-            pass
 
         context["active_user"] = username
         sp = spotipy.Spotify(auth=token)

@@ -125,13 +125,13 @@ def main(playlist_id, username, token):
         df_features = clean_data(df_master)  # clean data and return df with more features
 
         train_scaler = MinMaxScaler().fit(df_features)
-        X_train_scaled = train_scaler.transform(df_features)
+        x_train_scaled = train_scaler.transform(df_features)
 
         # create a dataframe from the scaled data
-        X_train_scaled = pd.DataFrame(
-            X_train_scaled, columns=df_features.columns, index=df_features.index)
+        x_train_scaled = pd.DataFrame(
+            x_train_scaled, columns=df_features.columns, index=df_features.index)
 
-        logger.info("df shape is {}".format(X_train_scaled.shape))
+        logger.info("df shape is {}".format(x_train_scaled.shape))
 
         logger.info("=> fitting HDBSCAN object")
         # create hdbscan classifier fit on the PCA_df
@@ -141,12 +141,12 @@ def main(playlist_id, username, token):
             min_samples=1,
             min_cluster_size=2,
             leaf_size=2,
-            cluster_selection_epsilon=0.5).fit(X_train_scaled)
+            cluster_selection_epsilon=0.5).fit(x_train_scaled)
 
         prof_obj.user_hdbscan = hdbs
         prof_obj.user_train_scaler = train_scaler
         prof_obj.user_df_features_obj = df_features
-        prof_obj.user_df_scaled_obj = X_train_scaled
+        prof_obj.user_df_scaled_obj = x_train_scaled
         prof_obj.user_has_objects = True
         prof_obj.user_has_objects = True
         prof_obj.save()

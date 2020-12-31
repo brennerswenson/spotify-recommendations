@@ -17,7 +17,7 @@
                             src="https://open.spotify.com/embed/playlist/{{ chosen_playlist.playlist_id }}"
                             height="500"
                             width="400"
-                            frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            allow="encrypted-media" title=""></iframe>
                 </div>
                 <div class="col-sm-12 col-md-6">
                     {% if not script_ran and not remove_rec_button %}
@@ -51,24 +51,25 @@
                             </div>
                         </div>
                         <div class="">
-                        <div class="">
+                            <div class="">
 
-                        </div>
-                    {% elif script_ran %}
-                        <div class=" d-flex flex-column justify-content-center ml-3 ml-md-5"">
+                            </div>
+                            {% elif script_ran %}
+                            <div class=" d-flex flex-column justify-content-center ml-3 ml-md-5"
+                            ">
                             <p class="text recommendation-text">All done! Below are your recommendations from
                                 the playlist on
                                 the
                                 left. Click on any of the buttons
                                 to be redirected to Spotify's website to listen to the
                                 song!</p>
-                        <h2>Song recommendations
-                            for {{ first_name }}:</h2>
-                        {% for rec in recs %}
-                            {% if rec.recommended_user == active_user and rec.parent_playlist_id == chosen_playlist.playlist_id %}
-                                <ul class="rec-list">
-                                    <li>
-                                        <div class="d-flex justify-content-center  song-thumb-container">
+                            <h2>Song recommendations
+                                for {{ first_name }}:</h2>
+                            {% for rec in recs %}
+                                {% if rec.recommended_user == active_user and rec.parent_playlist_id == chosen_playlist.playlist_id %}
+                                    <ul class="rec-list">
+                                        <li>
+                                            <div class="d-flex justify-content-center  song-thumb-container">
 
                                                 <div class="d-inline-block">
                                                     <div class="card rec-song-art">
@@ -90,10 +91,10 @@
                                                         </button>
                                                     </a>
                                                 </div>
-                                    </li>
-                                </ul>
-                            {% endif %}
-                        {% endfor %}
+                                        </li>
+                                    </ul>
+                                {% endif %}
+                            {% endfor %}
                         </div>
 
                         <div class="recommendations-for-blank"></div>
@@ -122,25 +123,25 @@
                     {% endif %}
                     </div>
                     </div>
-                    </div>
                 </div>
             </div>
+        </div>{% comment %}{% endcomment %}
         </div>
         <script>
-        $(window).on('load resize', function() {
-  $('iframe[src*="open.spotify.com/embed"]').each( function() {
-      console.log($(this).parent().css('width'));
-      const width = parseInt($(this).parent().css('width'));
-      console.log(`witdht: ${width}`);
-    $(this).css('width', `${width -50}px`);
-    $(this).attr('src', $(this).attr('src'));
-    $(this).removeClass('loaded');
+            $(window).on('load resize', function () {
+                $('iframe[src*="open.spotify.com/embed"]').each(function () {
+                    console.log($(this).parent().css('width'));
+                    const width = parseInt($(this).parent().css('width'));
+                    console.log(`witdht: ${width}`);
+                    $(this).css('width', `${width - 50}px`);
+                    $(this).attr('src', $(this).attr('src'));
+                    $(this).removeClass('loaded');
 
-    $(this).on('load', function(){
-      $(this).addClass('loaded');
-    });
-  });
-});
+                    $(this).on('load', function () {
+                        $(this).addClass('loaded');
+                    });
+                });
+            });
         </script>
 
     {% else %}

@@ -4,95 +4,95 @@
 {% block content %}
 
     {% if user.is_authenticated %}
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="jumbotron custom-jumbo">
-                        <h1 class="display-4 recommendations-title">Spotify Song Recommender</h1>
-                        <h3 class="display-3 recommendations-greeting">Hi {{ first_name }}!</h3>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="text">Choose a playlist you'd like to get recommendations from!</p>
-                                <p class="text">Simply click on a playlist to get a recommendation from its tracks that
-                                    you'll like the most</p>
-                                <p class="text">Here is a list of Spotify's featured playlists right now:</p>
-                                {% for pb in playlist_batches %}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron custom-jumbo">
+                    <h1 class="display-4 recommendations-title">Spotify Song Recommender</h1>
+                    <h3 class="display-3 recommendations-greeting">Hi {{ first_name }}!</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="text">Choose a playlist you'd like to get recommendations from!</p>
+                            <p class="text">Simply click on a playlist to get a recommendation from its tracks that
+                                you'll like the most</p>
+                            <p class="text">Here is a list of Spotify's featured playlists right now:</p>
+                            {% for pb in playlist_batches %}
 
-                                    <div class="container playlist-thumb-container">
-                                        <div class="row justify-content-md-around">
-                                            {% if pb.0.playlist_featured %}
-                                                <div class="col-lg-4">
-                                                    <div class="card playlist-thumb playlist-thumb-left">
-                                                        <a class="card"
-                                                           href="{% url "spotify_app:playlist_detail" pb.0.playlist_id %}">
-                                                            <img class="img-responsive"
-                                                                 src="{{ pb.0.playlist_img_src }}">
-                                                        </a>
-                                                    </div>
+                                <div class="container playlist-thumb-container">
+                                    <div class="row justify-content-md-around">
+                                        {% if pb.0.playlist_featured %}
+                                            <div class="col-lg-4">
+                                                <div class="card playlist-thumb playlist-thumb-left">
+                                                    <a class="card"
+                                                       href="{% url "spotify_app:playlist_detail" pb.0.playlist_id %}">
+                                                        <img class="img-responsive"
+                                                             src="{{ pb.0.playlist_img_src }}">
+                                                    </a>
                                                 </div>
-                                            {% endif %}
+                                            </div>
+                                        {% endif %}
 
-                                            {% if pb.1.playlist_featured %}
-                                                <div class="col-lg-4">
-                                                    <div class="card playlist-thumb playlist-thumb-right">
-                                                        <a class="card"
-                                                           href="{% url "spotify_app:playlist_detail" pb.1.playlist_id %}">
-                                                            <img class="img-responsive"
-                                                                 src="{{ pb.1.playlist_img_src }}">
-                                                        </a>
+                                        {% if pb.1.playlist_featured %}
+                                            <div class="col-lg-4">
+                                                <div class="card playlist-thumb playlist-thumb-right">
+                                                    <a class="card"
+                                                       href="{% url "spotify_app:playlist_detail" pb.1.playlist_id %}">
+                                                        <img class="img-responsive"
+                                                             src="{{ pb.1.playlist_img_src }}">
+                                                    </a>
 
-                                                    </div>
                                                 </div>
-                                            {% endif %}
+                                            </div>
+                                        {% endif %}
 
-                                            {% if pb.2.playlist_featured %}
-                                                <div class="col-lg-4">
-                                                    <div class="card playlist-thumb playlist-thumb-right">
-                                                        <a class="card"
-                                                           href="{% url "spotify_app:playlist_detail" pb.2.playlist_id %}">
-                                                            <img class="img-responsive"
-                                                                 src="{{ pb.2.playlist_img_src }}">
-                                                        </a>
+                                        {% if pb.2.playlist_featured %}
+                                            <div class="col-lg-4">
+                                                <div class="card playlist-thumb playlist-thumb-right">
+                                                    <a class="card"
+                                                       href="{% url "spotify_app:playlist_detail" pb.2.playlist_id %}">
+                                                        <img class="img-responsive"
+                                                             src="{{ pb.2.playlist_img_src }}">
+                                                    </a>
 
-                                                    </div>
                                                 </div>
-                                            {% endif %}
-                                        </div>
+                                            </div>
+                                        {% endif %}
                                     </div>
+                                </div>
 
-                                {% endfor %}
-                            </div>
-                            <div class="col-md-6">
-                                <p class="text">Or you can use a playlist of your own choosing!</p>
-                                <p class="text">Go to your Spotify, right click on the three dots, then share, and "Copy
-                                    Spotify URI"</p>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text">Or you can use a playlist of your own choosing!</p>
+                            <p class="text">Go to your Spotify, right click on the three dots, then share, and "Copy
+                                Spotify URI"</p>
 
-                                <form method="post" class="text custom-playlist-form">
-                                    {% csrf_token %}
-                                    {{ form.as_p }}
-                                    <input type="submit" value="Go to playlist"
-                                           class="btn btn-primary btn custom-playlist-button">
-                                </form>
+                            <form method="post" class="text custom-playlist-form">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="submit" value="Go to playlist"
+                                       class="btn btn-primary btn custom-playlist-button">
+                            </form>
 
-                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
+
+        </div>
 
     {% else %}
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="jumbotron">
-                        <h1 class="display-4">Spotify Song Recommender</h1>
-                        <p class="lead">Please log in to your Spotify account to get song recommendations</p>
-                        <p class="lead">
-                            <a class="btn btn-success btn-lg" href="{% url "social:begin" "spotify" %}"
-                               role="button">Log in with Spotify</a>
-                        </p>
-                    </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron">
+                    <h1 class="display-4">Spotify Song Recommender</h1>
+                    <p class="lead">Please log in to your Spotify account to get song recommendations</p>
+                    <p class="lead">
+                        <a class="btn btn-success btn-lg" href="{% url "social:begin" "spotify" %}"
+                           role="button">Log in with Spotify</a>
+                    </p>
                 </div>
             </div>
+        </div>
     {% endif %}
 
 {% endblock content %}

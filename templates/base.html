@@ -40,10 +40,11 @@
 
 
 
+
                 {% if user.is_authenticated %}{% url 'spotify_app:playlist_list' %} {% else %} {% url 'home' %} {% endif %}"
-           class="navbar-brand nav-link fas fa-home fa-1x" id='homeButton'><i></i></a>
+           class="navbar-brand nav-link fas fa-home fa-1x" id='homeButton'><em></em></a>
         <button class="navbar-toggler navbar-toggle" type="button" data-toggle="collapse"
-                data-target="#collapsibleNavbar" id="hamburger"><i class="fas fa-bars hamburger"></i>
+                data-target="#collapsibleNavbar" id="hamburger"><em class="fas fa-bars hamburger"></em>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
             <ul class="navbar-nav ">
@@ -58,21 +59,21 @@
                 <li class='nav-item'>
                     {% if user.is_authenticated %}
 
-                        <a href="{% url 'logout' %}" class="header-link"><i
-                                class="nav-link fas fa-sign-out-alt fa-2x"></i></a>
+                        <a href="{% url 'logout' %}" class="header-link"><em
+                                class="nav-link fas fa-sign-out-alt fa-2x"></em></a>
 
                     {% else %}
-                        <a href="{% url "social:begin" "spotify" %}"><i
-                                class="nav-link fas fa-sign-in-alt fa-2x"></i></a>
+                        <a href="{% url "social:begin" "spotify" %}"><em
+                                class="nav-link fas fa-sign-in-alt fa-2x"></em></a>
                     {% endif %}
 
 
                 </li>
                 <li class='nav-item'><a href="https://github.com/brennerswenson">
-                    <i id="navGithubBtn" class="nav-link fab fa-github fa-2x"></i></a>
+                    <em id="navGithubBtn" class="nav-link fab fa-github fa-2x"></em></a>
                 </li>
                 <li class='nav-item'><a href="https://www.linkedin.com/in/brenner-swenson/">
-                    <i id="navLinkedInBtn" class=" nav-link fab fa-linkedin fa-2x"></i></a>
+                    <em id="navLinkedInBtn" class=" nav-link fab fa-linkedin fa-2x"></em></a>
                 </li>
 
             </ul>
@@ -88,19 +89,19 @@
         {% endblock content %}
     </section>
 </div>
-    <footer class="position-absolute w-100" style="bottom:0;">
-        <div class="container-fluid ">
-            <div class="row">
-                <div class="col-sm-12 footer text-center">
-                    <div class="footerContent">
-                        <i class="fas fa-envelope fa-1x"></i>
-                        <p id="footerEmail">BRENNER.SWENSON@GMAIL.COM</p>
-                    </div>
+<footer class="position-absolute w-100" style="bottom:0;">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-sm-12 footer text-center">
+                <div class="footerContent">
+                    <em class="fas fa-envelope fa-1x"></em>
+                    <p id="footerEmail">BRENNER.SWENSON@GMAIL.COM</p>
                 </div>
-
             </div>
+
         </div>
-    </footer>
+    </div>
+</footer>
 
 
 </html>

@@ -89,3 +89,5 @@ local_settings.py
 
 .env
 db.sqlite3
+.ipynb_checkpoints/
+.cache-*
