@@ -6,136 +6,140 @@
 
 
     {% if user.is_authenticated %}
+        <div class="jumbotron text-center w-100 ">
+            <h1 class="display-4 recommendations-title">Spotify Song Recommender BUTTHOLE</h1>
+        </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12 rec-main-col">
-                    <div class="jumbotron">
-                        <h1 class="display-4 recommendations-title">Spotify Song Recommender</h1>
-                        <div class="row">
-                            <div class="col-md-6">
+                <div class="col-sm-12 col-md-6">
 
-                                <iframe class="embedded-playlist"
-                                        src="https://open.spotify.com/embed/playlist/{{ chosen_playlist.playlist_id }}"
-                                        width="500" height="1000"
-                                        frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="container-fluid">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                {% if not script_ran and not remove_rec_button %}
-                                                    <div class="recommendation-text ">
-                                                        <p class="text">By clicking the button below, we will provide
-                                                            you with song
-                                                            recommendations from the
-                                                            playlist you selected by pulling in all of the songs you
-                                                            have
-                                                            saved, and
-                                                            the contents of all playlists you have created on
-                                                            Spotify.</p>
+                    <iframe class="ml-3" id="playlistEmbedded"
+                            src="https://open.spotify.com/embed/playlist/{{ chosen_playlist.playlist_id }}"
+                            height="500"
+                            width="400"
+                            frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    {% if not script_ran and not remove_rec_button %}
+                        <div class="d-flex flex-column justify-content-center ml-3 ml-md-5">
+                            <p class="text">By clicking the button below, we will provide
+                                you with song
+                                recommendations from the
+                                playlist you selected by pulling in all of the songs you
+                                have
+                                saved, and
+                                the contents of all playlists you have created on
+                                Spotify.
+                                <br/>
+                                <br/>
 
-                                                        <p class="text">Depending on the amount of songs/playlists you
-                                                            have
-                                                            saved/created, this can take quite some time to run the
-                                                            first time
-                                                            you get recommendations because we have to analyze your
-                                                            library.
-                                                            Please be patient, and be aware that if you do not have much
-                                                            saved content, you may not get recommendations.</p>
-                                                    </div>
-                                                    <div class="col-xs-12 button-holder">
-                                                    <div class="ajax-button">
-                                                        <div class="fa fa-check done"></div>
-                                                        <div class="fa fa-close failed"></div>
-                                                        <a href="
+                                Depending on the amount of songs/playlists you
+                                have
+                                saved/created, this can take quite some time to run the
+                                first time
+                                you get recommendations because we have to analyze your
+                                library.
+                                Please be patient, and be aware that if you do not have much
+                                saved content, you may not get recommendations.
+                            </p>
+                            <div class="fa fa-check done"></div>
+                            <div class="fa fa-close failed"></div>
+                            <div class=" text-center my-5">
+                                <a class="btn btn-primary" href="
                                         {% url "spotify_app:recommendations" chosen_playlist.playlist_id %}">
-                                                            <input id="submit" class="submit rec-button" type="button"
-                                                                   value="Get recommendations"/></a>
-                                                    </div>
-                                                {% elif script_ran %}
-                                                    <div class="recommendation-text">
-                                                        <p class="text">All done! Below are your recommendations from
-                                                            the playlist on
-                                                            the
-                                                            left. Click on any of the buttons
-                                                            to be redirected to Spotify's website to listen to the
-                                                            song!</p>
-                                                    </div>
-                                                    <div class="recommendations-for-blank"><h2>Song recommendations
-                                                        for {{ first_name }}:</h2></div>
-                                                    {% for rec in recs %}
-                                                        {% if rec.recommended_user == active_user and rec.parent_playlist_id == chosen_playlist.playlist_id %}
-                                                            <ul class="rec-list">
-                                                                <li>
-                                                                    <div class="container song-thumb-container">
-                                                                        <div class="row rec-row">
-
-                                                                            <div class="col-sm-4">
-                                                                                <div class="card rec-song-art">
-                                                                                    <a href="https://open.spotify.com/track/{{ rec.song_id }}"
-                                                                                       target="_blank">
-                                                                                        <img class="img-responsive"
-                                                                                             src="{{ rec.album_cover_art }}">
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-8 button-div">
-                                                                                <a target="_blank"
-                                                                                   href="https://open.spotify.com/track/{{ rec.song_id }}">
-                                                                                    <button type="button"
-                                                                                            class="btn btn-success rec-song-button align-middle">
-                                                                                        {{ rec.song_name }}
-                                                                                        -
-                                                                                        {{ rec.artist_name }}
-                                                                                    </button>
-                                                                                </a>
-                                                                            </div>
-                                                                </li>
-                                                            </ul>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                {% endif %}
-                                                {% if no_recommendations %}
-                                                    <div class="row">
-                                                    <h4 class="no-rec-header">No recommendations! Try again</h4>
-                                                    <div class="recommendation-text">
-                                                        <p>It appears that either the playlist you selected did not
-                                                            contain
-                                                            any songs that match your criteria,
-                                                            or your Spotify library is not very large. Please try again
-                                                            with
-                                                            a different playlist!</p>
-                                                    </div>
-                                                    <div class="col-xs-12 button-holder">
-                                                    <div class="ajax-button">
-                                                        <div class="fa fa-check done"></div>
-                                                        <div class="fa fa-close failed"></div>
-                                                        <a href="
-                                        {% url "spotify_app:playlist_list" %}">
-                                                            <input id="submit" class="submit rec-button" type="button"
-                                                                   value="Back to Playlists"/></a>
-                                                    </div>
-                                                {% endif %}
-                                                </div>
-                                                </div>
-                                                </div>
-                                                <div class="container-fluid row ">
-                                                    <div class="container">
-                                                        <div class="row">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    BUTTS</a>
                             </div>
                         </div>
+                        <div class="">
+                        <div class="">
+
+                        </div>
+                    {% elif script_ran %}
+                        <div class="recommendation-text">
+                            <p class="text">All done! Below are your recommendations from
+                                the playlist on
+                                the
+                                left. Click on any of the buttons
+                                to be redirected to Spotify's website to listen to the
+                                song!</p>
+                        </div>
+                        <div class="recommendations-for-blank"><h2>Song recommendations
+                            for {{ first_name }}:</h2></div>
+                        {% for rec in recs %}
+                            {% if rec.recommended_user == active_user and rec.parent_playlist_id == chosen_playlist.playlist_id %}
+                                <ul class="rec-list">
+                                    <li>
+                                        <div class="container song-thumb-container">
+                                            <div class="row rec-row">
+
+                                                <div class="col-sm-4">
+                                                    <div class="card rec-song-art">
+                                                        <a href="https://open.spotify.com/track/{{ rec.song_id }}"
+                                                           target="_blank">
+                                                            <img class="img-responsive"
+                                                                 src="{{ rec.album_cover_art }}">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-8 button-div">
+                                                    <a target="_blank"
+                                                       href="https://open.spotify.com/track/{{ rec.song_id }}">
+                                                        <button type="button"
+                                                                class="btn btn-success rec-song-button align-middle">
+                                                            {{ rec.song_name }}
+                                                            -
+                                                            {{ rec.artist_name }}
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if no_recommendations %}
+                        <div class="row">
+                        <h4 class="no-rec-header">No recommendations! Try again</h4>
+                        <div class="recommendation-text">
+                            <p>It appears that either the playlist you selected did not
+                                contain
+                                any songs that match your criteria,
+                                or your Spotify library is not very large. Please try again
+                                with
+                                a different playlist!</p>
+                        </div>
+                        <div class="mx-auto button-holder">
+                        <div class="ajax-button">
+                            <div class="fa fa-check done"></div>
+                            <div class="fa fa-close failed"></div>
+                            <a href="
+                                        {% url "spotify_app:playlist_list" %}">
+                                <input id="submit" class="submit rec-button" type="button"
+                                       value="Back to Playlists"/></a>
+                        </div>
+                    {% endif %}
+                    </div>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+        $(window).on('load resize', function() {
+  $('iframe[src*="open.spotify.com/embed"]').each( function() {
+      console.log($(this).parent().css('width'));
+      const width = parseInt($(this).parent().css('width'));
+      console.log(`witdht: ${width}`);
+    $(this).css('width', `${width -50}px`);
+    $(this).attr('src', $(this).attr('src'));
+    $(this).removeClass('loaded');
+
+    $(this).on('load', function(){
+      $(this).addClass('loaded');
+    });
+  });
+});
+        </script>
 
     {% else %}
         <div class="container-fluid">

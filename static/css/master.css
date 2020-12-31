@@ -43,11 +43,13 @@
 body {
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 .myContent {
-    min-height: 84vh;
-    flex: 1 0 auto;
+    height:100vh;
+    /*min-height: 84vh;*/
+    /*flex: 1 0 auto;*/
 }
 
 .text {
@@ -300,4 +302,12 @@ input {
             font-size: .9rem;
         }
     }
+
 }
+@media (min-width: 1000px) {
+        #playlistEmbedded {
+    width: 500px !important;
+}
+    }
+
+
