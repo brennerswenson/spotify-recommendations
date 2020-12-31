@@ -253,9 +253,6 @@ def get_artist_info(df_master, username, token, sp):
             lambda x: [i.replace(" ", "_") for i in x]
         )
 
-        #######################################################################################################
-
-        # merge master df with artists df
         df_master = df_master.join(artists_df, on="artist_id")
 
         return artists_df, df_master
